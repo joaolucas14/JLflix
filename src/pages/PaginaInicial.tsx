@@ -1,18 +1,14 @@
-import { useEffect, useState } from "react";
-import http from "../api";
+import { useEffect } from "react";
 import IFilme from "../interfaces/Ifilme";
+import useListaFilmes from "../states/useListaFilmes";
 
 export default function PaginaInicial() {
-  const [filmes, setFilmes] = useState<IFilme[]>([]);
+  const { buscarFilmes, listaFilmes } = useListaFilmes();
   useEffect(() => {
-    async function buscarFilmes() {
-      try {
-        const resposta = await http.get("discover/movie");
-        console.log(resposta.data);
-        setFilmes(resposta.data.results);
-      } catch (erro) {
-        console.error("Erro ao conectar à API:", erro);
-      }
+    try {
+      buscarFilmes();
+    } catch (erro) {
+      console.error("Erro ao conectar à API:", erro);
     }
 
     buscarFilmes(); // Chamando a função dentro do useEffect
@@ -21,8 +17,8 @@ export default function PaginaInicial() {
   return (
     <div>
       <h1>Página Inicial</h1>
-      {filmes &&
-        filmes.map((filme: IFilme) => (
+      {listaFilmes &&
+        listaFilmes.map((filme: IFilme) => (
           <div key={filme.id} style={{ margin: "20px", textAlign: "center" }}>
             <p>{filme.id}</p>
             <p>{filme.title}</p>
