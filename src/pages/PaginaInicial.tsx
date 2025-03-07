@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import http from "../api";
+import IFilme from "../interfaces/Ifilme";
 
 export default function PaginaInicial() {
-  const [filmes, setFilmes] = useState();
+  const [filmes, setFilmes] = useState<IFilme[]>([]);
   useEffect(() => {
     async function buscarFilmes() {
       try {
         const resposta = await http.get("discover/movie");
         console.log(resposta.data);
-        setFilmes(resposta.data);
+        setFilmes(resposta.data.results);
       } catch (erro) {
         console.error("Erro ao conectar à API:", erro);
       }
@@ -21,11 +22,8 @@ export default function PaginaInicial() {
     <div>
       <h1>Página Inicial</h1>
       {filmes &&
-        filmes.results.map((filme: any) => (
-          <div
-            key={filme.imdbID}
-            style={{ margin: "20px", textAlign: "center" }}
-          >
+        filmes.map((filme: IFilme) => (
+          <div key={filme.id} style={{ margin: "20px", textAlign: "center" }}>
             <p>{filme.id}</p>
             <p>{filme.title}</p>
             <img
