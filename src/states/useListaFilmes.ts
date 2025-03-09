@@ -2,7 +2,7 @@ import { useRecoilState } from "recoil";
 import { listaFilmesState } from "./atom";
 import http from "../api";
 import { useEffect, useState, useRef } from "react";
-import IFilme from "../interfaces/Ifilme";
+import IFilme from "../interfaces/IFilme";
 
 export default function useListaFilmes() {
   const [listaFilmes, setListaFilmes] = useRecoilState(listaFilmesState);

@@ -1,4 +1,4 @@
-import IFilme from "../../interfaces/Ifilme";
+import IFilme from "../../interfaces/IFilme";
 import StarRating from "../StarRating";
 import styles from "./MovieCard.module.css";
 

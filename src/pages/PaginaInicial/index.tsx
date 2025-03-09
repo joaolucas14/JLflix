@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import useListaFilmes from "../../states/useListaFilmes";
-import IFilme from "../../interfaces/Ifilme";
+import IFilme from "../../interfaces/IFilme";
 import styles from "./PaginaInicial.module.css";
 import MovieCard from "../../components/MovieCard";
 
 export default function PaginaInicial() {
   const { buscarFilmes, listaFilmes } = useListaFilmes();
+
   useEffect(() => {
     try {
       buscarFilmes();
