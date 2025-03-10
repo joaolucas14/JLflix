@@ -1,11 +1,9 @@
 import { useEffect } from "react";
 import useListaFilmes from "../../states/useListaFilmes";
-import IFilme from "../../interfaces/IFilme";
-import styles from "./PaginaInicial.module.css";
-import MovieCard from "../../components/MovieCard";
+import MovieList from "../../components/MovieList";
 
 export default function PaginaInicial() {
-  const { buscarFilmes, listaFilmes } = useListaFilmes();
+  const { buscarFilmes } = useListaFilmes();
 
   useEffect(() => {
     try {
@@ -18,12 +16,7 @@ export default function PaginaInicial() {
   return (
     <>
       <h1>Filmes em alta</h1>
-      <ul className={styles.container}>
-        {listaFilmes &&
-          listaFilmes.map((filme: IFilme) => (
-            <MovieCard key={filme.id} {...filme} />
-          ))}
-      </ul>
+      <MovieList />
     </>
   );
 }
