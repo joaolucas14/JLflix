@@ -7,9 +7,12 @@ export default function MovieList() {
   return (
     <ContainerMovieList>
       {listaFilmes &&
-        listaFilmes.map((filme: IFilme) => (
-          <MovieCard key={filme.id} {...filme} />
-        ))}
+        listaFilmes
+          .filter(
+            (filme, index, self) =>
+              self.findIndex((f) => f.id === filme.id) === index
+          )
+          .map((filme: IFilme) => <MovieCard key={filme.id} {...filme} />)}
     </ContainerMovieList>
   );
 }
