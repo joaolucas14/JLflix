@@ -1,10 +1,13 @@
 import { Outlet } from "react-router-dom";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
 
 export default function PaginaPadrao() {
   return (
     <div>
-      <h1>JLflix</h1>
+      <Header />
       <Outlet />
+      <Footer />
     </div>
   );
 }

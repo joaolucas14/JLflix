@@ -1,13 +1,16 @@
+import { useNavigate } from "react-router-dom";
 import IFilme from "../../interfaces/IFilme";
 import StarRating from "../StarRating";
 import styles from "./MovieCard.module.css";
 
 export default function MovieCard({
+  id,
   title,
   overview,
   poster_path,
   vote_average,
 }: IFilme) {
+  const navigate = useNavigate();
   return (
     <li className={styles.movie_card}>
       <div className={styles.movie_poster}>
@@ -28,7 +31,12 @@ export default function MovieCard({
             </p>
           )}
 
-          <button className={styles.btn_default}>Ver mais</button>
+          <button
+            className={styles.btn_default}
+            onClick={() => navigate(`/filme/${id}`)}
+          >
+            Ver mais
+          </button>
         </div>
       </div>
     </li>
