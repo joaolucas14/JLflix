@@ -17,7 +17,6 @@ export default function StarRating(props: IStarRating) {
       emptyStars.push(i);
     }
   }
-  console.log(numStarts);
   return (
     <div className={styles.movie_rate}>
       {fullStars.map((index) => (
