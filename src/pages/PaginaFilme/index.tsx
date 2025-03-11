@@ -45,9 +45,14 @@ export default function PaginaFilme() {
                 <p className={styles.title}>{filme.title}</p>
                 <p>{filme.genres.map((gen) => gen.name).join(", ")}</p>
                 <div className={styles.detalhes}>
-                  Data de lançamento:
-                  {new Date(filme.release_date).toLocaleDateString()}
-                  <StarRating rating={filme.vote_average} />
+                  {filme.release_date && filme.release_date.length > 1
+                    ? `Data de lançamento: ${new Date(
+                        filme.release_date
+                      ).toLocaleDateString()}`
+                    : "Data de lançamento não disponível"}
+                  {Number(filme.vote_average) > 0 && (
+                    <StarRating rating={filme.vote_average} />
+                  )}
                 </div>
                 <p>{filme.overview}</p>
               </div>
@@ -56,11 +61,21 @@ export default function PaginaFilme() {
 
           <div className={styles.container_collection}>
             {colecao && (
-              <ContainerMovieList>
-                {colecao.parts.map((filme) => (
-                  <MovieCard key={filme.id} {...filme} />
-                ))}
-              </ContainerMovieList>
+              <>
+                <h1>Filmes da Franquia</h1>
+                <ContainerMovieList>
+                  {colecao.parts
+                    .filter((filme) => filme.id !== Number(id))
+                    .sort(
+                      (a, b) =>
+                        new Date(a.release_date).getTime() -
+                        new Date(b.release_date).getTime()
+                    )
+                    .map((filme) => (
+                      <MovieCard key={filme.id} {...filme} />
+                    ))}
+                </ContainerMovieList>
+              </>
             )}
           </div>
         </>
