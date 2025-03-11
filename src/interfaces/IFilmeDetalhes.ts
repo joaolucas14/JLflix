@@ -12,4 +12,10 @@ export interface IFilmeDetalhes {
   vote_average: string;
   release_date: string;
   genres: [{ id: number; name: string }];
+  belongs_to_collection: {
+    backdrop_path: string;
+    id: number;
+    name: string;
+    poster_path: string;
+  };
 }
