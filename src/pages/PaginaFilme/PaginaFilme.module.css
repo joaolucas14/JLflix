@@ -24,6 +24,11 @@
   justify-content: space-between;
   flex-wrap: nowrap;
 }
+
+.container_collection ul {
+  width: 90%;
+}
+
 @media (max-width: 1000px) {
   .detalhes {
     flex-direction: column;

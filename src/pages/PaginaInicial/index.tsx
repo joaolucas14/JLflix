@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import useListaFilmes from "../../states/useListaFilmes";
 import MovieList from "../../components/MovieList";
+import styles from "./PaginaInicial.module.css";
 
 export default function PaginaInicial() {
   const { buscarFilmes } = useListaFilmes();
@@ -16,7 +17,9 @@ export default function PaginaInicial() {
   return (
     <>
       <h1>Filmes em alta</h1>
-      <MovieList />
+      <div className={styles.container}>
+        <MovieList />
+      </div>
     </>
   );
 }
