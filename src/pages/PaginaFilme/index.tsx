@@ -47,7 +47,9 @@ export default function PaginaFilme() {
                 <div className={styles.detalhes}>
                   Data de lançamento:
                   {new Date(filme.release_date).toLocaleDateString()}
-                  <StarRating rating={filme.vote_average} />
+                  {Number(filme.vote_average) > 0 && (
+                    <StarRating rating={filme.vote_average} />
+                  )}
                 </div>
                 <p>{filme.overview}</p>
               </div>
@@ -56,11 +58,14 @@ export default function PaginaFilme() {
 
           <div className={styles.container_collection}>
             {colecao && (
-              <ContainerMovieList>
-                {colecao.parts.map((filme) => (
-                  <MovieCard key={filme.id} {...filme} />
-                ))}
-              </ContainerMovieList>
+              <>
+                <h1>Filmes Relacionados</h1>
+                <ContainerMovieList>
+                  {colecao.parts.map((filme) => (
+                    <MovieCard key={filme.id} {...filme} />
+                  ))}
+                </ContainerMovieList>
+              </>
             )}
           </div>
         </>
