@@ -18,4 +18,5 @@ export interface IFilmeDetalhes {
     name: string;
     poster_path: string;
   };
+  runtime: number;
 }
