@@ -4,8 +4,8 @@ import useFilme from "../../states/useFilme";
 import styles from "./PaginaFilme.module.css";
 import StarRating from "../../components/StarRating";
 import useColecaoFilme from "../../states/useColecaoFilme";
-import ContainerMovieList from "../../components/ContainerMovieList";
 import MovieCard from "../../components/MovieCard";
+import ContainerMovieList from "../../components/ContainerMovieList";
 
 export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
@@ -45,19 +45,19 @@ export default function PaginaFilme() {
               </div>
             </div>
           </div>
+          {filme.belongs_to_collection && (
+            <button onClick={() => teste(filme.belongs_to_collection.id)}>
+              TESTE
+            </button>
+          )}
           <div className={styles.container_collection}>
-            {filme.belongs_to_collection && (
-              <button onClick={() => teste(filme.belongs_to_collection.id)}>
-                TESTE
-              </button>
-            )}
-
-            <ContainerMovieList>
-              {colecao &&
-                colecao.parts.map((filme) => (
+            {colecao && (
+              <ContainerMovieList>
+                {colecao.parts.map((filme) => (
                   <MovieCard key={filme.id} {...filme} />
                 ))}
-            </ContainerMovieList>
+              </ContainerMovieList>
+            )}
           </div>
         </>
       )}
