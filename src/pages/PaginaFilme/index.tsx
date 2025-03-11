@@ -11,16 +11,24 @@ export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
   const { buscarFilme, filme } = useFilme();
   const { buscarColecao, colecao, setColecao } = useColecaoFilme();
+  const isCollection = filme?.belongs_to_collection?.id;
+
   useEffect(() => {
     if (id) {
       buscarFilme(id);
       setColecao(null);
     }
-  }, [id]);
+  }, [id]); // Busca o filme apenas quando o ID mudar
 
-  function teste(id: number) {
-    buscarColecao(id);
-  }
+  useEffect(() => {
+    if (isCollection) {
+      const timer = setTimeout(() => {
+        buscarColecao(isCollection);
+      }, 2000); // Aguarda 2 segundos antes de fazer a requisição
+
+      return () => clearTimeout(timer); // Limpa o timeout se o componente desmontar
+    }
+  }, [id, isCollection]);
 
   return (
     <div>
@@ -45,11 +53,7 @@ export default function PaginaFilme() {
               </div>
             </div>
           </div>
-          {filme.belongs_to_collection && (
-            <button onClick={() => teste(filme.belongs_to_collection.id)}>
-              TESTE
-            </button>
-          )}
+
           <div className={styles.container_collection}>
             {colecao && (
               <ContainerMovieList>
