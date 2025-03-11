@@ -43,6 +43,11 @@ export default function PaginaFilme() {
             >
               <div className={styles.infos}>
                 <p className={styles.title}>{filme.title}</p>
+                {filme.runtime && (
+                  <p>{`Duração: ${Math.floor(filme.runtime / 60)}h ${
+                    filme.runtime % 60
+                  }min`}</p>
+                )}
                 <p>{filme.genres.map((gen) => gen.name).join(", ")}</p>
                 <div className={styles.detalhes}>
                   {filme.release_date && filme.release_date.length > 1
@@ -50,6 +55,7 @@ export default function PaginaFilme() {
                         filme.release_date
                       ).toLocaleDateString()}`
                     : "Data de lançamento não disponível"}
+
                   {Number(filme.vote_average) > 0 && (
                     <StarRating rating={filme.vote_average} />
                   )}
