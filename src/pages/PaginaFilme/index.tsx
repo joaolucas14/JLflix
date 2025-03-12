@@ -7,6 +7,7 @@ import useColecaoFilme from "../../states/useColecaoFilme";
 import MovieCard from "../../components/MovieCard";
 import ContainerMovieList from "../../components/ContainerMovieList";
 import useCreditosFilme from "../../states/useCreditosFilme";
+import InfoMovie from "../../components/InfoMovie";
 
 export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
@@ -68,40 +69,7 @@ export default function PaginaFilme() {
             </div>
           </div>
           <div className={styles.detalhes}>
-            <div>
-              <div className={styles.pais_receita}>
-                <h2>Valores</h2>
-                <div className={styles.item}>
-                  <p>País das gravações: </p>
-
-                  {filme.origin_country.map((pais) => (
-                    <p>{` ${pais}`}</p>
-                  ))}
-                </div>
-                <div className={styles.item}>
-                  <p>Custo da Produção: </p>
-                  <p>
-                    {filme.budget.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    })}
-                  </p>
-                </div>
-                <div className={styles.item}>
-                  <p>Valor da receita: </p>
-                  <p>
-                    {filme.revenue.toLocaleString("pt-BR", {
-                      style: "currency",
-                      currency: "BRL",
-                      minimumFractionDigits: 0,
-                      maximumFractionDigits: 0,
-                    })}
-                  </p>
-                </div>
-              </div>
-            </div>
+            <InfoMovie {...filme} />
             {creditos && (
               <div className={styles.crew}>
                 <h2>Direção e Produção:</h2>
