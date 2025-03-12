@@ -26,7 +26,6 @@ export default function useListaFilmes() {
           page: pagina, // Número da página
         },
       });
-      console.log("teste", resposta.data);
       // Filtra os filmes duplicados (caso já existam na lista)
       const novosFilmes = resposta.data.results.filter(
         (filme: IFilme) =>

@@ -6,16 +6,20 @@ import StarRating from "../../components/StarRating";
 import useColecaoFilme from "../../states/useColecaoFilme";
 import MovieCard from "../../components/MovieCard";
 import ContainerMovieList from "../../components/ContainerMovieList";
+import useCreditosFilme from "../../states/useCreditosFilme";
+import InfoMovie from "../../components/InfoMovie";
 
 export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
   const { buscarFilme, filme } = useFilme();
   const { buscarColecao, colecao, setColecao } = useColecaoFilme();
+  const { buscarCreditos, creditos } = useCreditosFilme();
   const isCollection = filme?.belongs_to_collection?.id;
 
   useEffect(() => {
     if (id) {
       buscarFilme(id);
+      buscarCreditos(id);
       setColecao(null);
     }
   }, [id]); // Busca o filme apenas quando o ID mudar
@@ -49,7 +53,7 @@ export default function PaginaFilme() {
                   }min`}</p>
                 )}
                 <p>{filme.genres.map((gen) => gen.name).join(", ")}</p>
-                <div className={styles.detalhes}>
+                <div className={styles.detalhes_info}>
                   {filme.release_date && filme.release_date.length > 1
                     ? `Data de lançamento: ${new Date(
                         filme.release_date
@@ -64,25 +68,68 @@ export default function PaginaFilme() {
               </div>
             </div>
           </div>
-
-          <div className={styles.container_collection}>
-            {colecao && (
-              <>
-                <h1>Filmes da Franquia</h1>
-                <ContainerMovieList>
-                  {colecao.parts
-                    .filter((filme) => filme.id !== Number(id))
-                    .sort(
-                      (a, b) =>
-                        new Date(a.release_date).getTime() -
-                        new Date(b.release_date).getTime()
-                    )
-                    .map((filme) => (
-                      <MovieCard key={filme.id} {...filme} />
-                    ))}
-                </ContainerMovieList>
-              </>
+          <div className={styles.detalhes}>
+            <InfoMovie {...filme} />
+            {creditos && (
+              <div className={styles.crew}>
+                <h2>Direção e Produção:</h2>
+                {creditos.crew
+                  .filter(
+                    (member) =>
+                      member.job === "Director" || member.job === "Producer"
+                  )
+                  .map((member) => (
+                    <div key={member.id} className={styles.crew_list}>
+                      <p>
+                        {member.job}: {member.name}
+                      </p>
+                      <img
+                        src={`https://image.tmdb.org/t/p/w200${member.profile_path}`}
+                        alt={member.name}
+                        className={styles.crew_image}
+                      />
+                    </div>
+                  ))}
+              </div>
             )}
+
+            {creditos && (
+              <div className={styles.cast}>
+                <h2>Elenco</h2>
+                <div className={styles.cast_list}></div>
+                {creditos.cast.slice(0, 5).map((ator) => (
+                  <div key={ator.id} className={styles.cast_item}>
+                    <img
+                      src={`https://image.tmdb.org/t/p/w200${ator.profile_path}`}
+                      alt={ator.name}
+                      className={styles.cast_image}
+                    />
+                    <p className={styles.cast_name}>{ator.name}</p>
+                    <p className={styles.cast_character}>{ator.character}</p>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className={styles.container_collection}>
+              {colecao && (
+                <>
+                  <h1>Filmes da Franquia</h1>
+                  <ContainerMovieList>
+                    {colecao.parts
+                      .filter((filme) => filme.id !== Number(id))
+                      .sort(
+                        (a, b) =>
+                          new Date(a.release_date).getTime() -
+                          new Date(b.release_date).getTime()
+                      )
+                      .map((filme) => (
+                        <MovieCard key={filme.id} {...filme} />
+                      ))}
+                  </ContainerMovieList>
+                </>
+              )}
+            </div>
           </div>
         </>
       )}

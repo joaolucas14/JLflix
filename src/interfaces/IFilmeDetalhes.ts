@@ -19,4 +19,7 @@ export interface IFilmeDetalhes {
     poster_path: string;
   };
   runtime: number;
+  homepage: string;
+  budget: number;
+  revenue: number;
 }
