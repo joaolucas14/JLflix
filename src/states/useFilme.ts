@@ -7,7 +7,7 @@ export default function useFilme() {
   async function buscarFilme(id: string) {
     try {
       const resposta = await http.get(`movie/${id}`);
-      console.log(resposta.data);
+      console.log("detalhes", resposta.data);
       setFilme(resposta.data);
     } catch (erro) {
       console.log("Erro ao buscar filme", erro);
