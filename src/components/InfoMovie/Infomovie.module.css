@@ -42,3 +42,9 @@
 .item p:first-child {
   font-weight: bold;
 }
+
+@media (max-width: 1000px) {
+  .pais_receita {
+    align-self: center;
+  }
+}

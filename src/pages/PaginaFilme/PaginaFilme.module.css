@@ -52,8 +52,4 @@
     flex-wrap: wrap;
     gap: 5px;
   }
-  .pais_receita {
-    align-self: flex-end;
-    align-self: flex-end; /* Alinha à direita */
-  }
 }
