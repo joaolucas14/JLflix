@@ -19,7 +19,7 @@
   margin: 0px;
 }
 
-.detalhes {
+.detalhes_info {
   display: flex;
   justify-content: space-between;
   flex-wrap: nowrap;
@@ -27,6 +27,45 @@
 
 .container_collection ul {
   width: 90%;
+}
+
+.detalhes {
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+}
+
+.pais_receita {
+  display: flex;
+  flex-direction: column;
+  background-color: darkblue;
+  width: 30%;
+  align-self: flex-start;
+  gap: 2px;
+  min-width: 300px;
+  padding: 10px;
+}
+
+.pais_receita h2 {
+  margin: 0px;
+}
+
+.item {
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
+  gap: 2px;
+}
+
+.item p {
+  width: 30%;
+  margin: 0px;
+}
+
+.crew {
+  background-color: darkred;
+  width: 30%;
+  align-self: flex-end; /* Alinha à direita */
 }
 
 @media (max-width: 1000px) {
