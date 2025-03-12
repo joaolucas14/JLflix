@@ -78,8 +78,8 @@ export default function PaginaFilme() {
                     (member) =>
                       member.job === "Director" || member.job === "Producer"
                   )
-                  .map((member) => (
-                    <div key={member.id} className={styles.crew_list}>
+                  .map((member, i) => (
+                    <div key={member.id + i} className={styles.crew_list}>
                       <p>
                         {member.job}: {member.name}
                       </p>
