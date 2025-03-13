@@ -8,6 +8,7 @@ import MovieCard from "../../components/MovieCard";
 import ContainerMovieList from "../../components/ContainerMovieList";
 import useCreditosFilme from "../../states/useCreditosFilme";
 import InfoMovie from "../../components/InfoMovie";
+import ListProducer from "../../components/ListProducer";
 
 export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
@@ -70,28 +71,7 @@ export default function PaginaFilme() {
           </div>
           <div className={styles.detalhes}>
             <InfoMovie {...filme} />
-            {creditos && (
-              <div className={styles.crew}>
-                <h2>Direção e Produção:</h2>
-                {creditos.crew
-                  .filter(
-                    (member) =>
-                      member.job === "Director" || member.job === "Producer"
-                  )
-                  .map((member, i) => (
-                    <div key={member.id + i} className={styles.crew_list}>
-                      <p>
-                        {member.job}: {member.name}
-                      </p>
-                      <img
-                        src={`https://image.tmdb.org/t/p/w200${member.profile_path}`}
-                        alt={member.name}
-                        className={styles.crew_image}
-                      />
-                    </div>
-                  ))}
-              </div>
-            )}
+            {creditos && <ListProducer {...creditos} />}
 
             {creditos && (
               <div className={styles.cast}>

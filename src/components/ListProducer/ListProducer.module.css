@@ -1,0 +1,39 @@
+.crew {
+  display: flex;
+  flex-direction: column;
+  background-color: #001a66; /* Azul escuro mais elegante */
+  align-self: flex-end; /* Alinha à direita */
+  width: 40%;
+  min-width: 320px;
+  padding: 20px;
+  gap: 12px;
+  color: white;
+  border-radius: 8px;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.crew_list {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.crew_list img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: white solid 2px;
+}
+
+.crew_list img:hover {
+  transform: scale(1.5);
+  transition: transform 0.3s ease-in-out;
+}
+
+.crew_list:last-child {
+  border-bottom: none;
+}
