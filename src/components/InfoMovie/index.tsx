@@ -12,27 +12,25 @@ export default function InfoMovie({
         <p>País das gravações: </p>
 
         {origin_country.map((pais) => (
-          <p>{` ${pais}`}</p>
+          <p key={pais}>{` ${pais}`}</p>
         ))}
       </div>
       <div className={styles.item}>
         <p>Custo da Produção: </p>
-        <p>
-          {budget > 0 ? (
-            <>
-              <p>
-                {budget.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                  minimumFractionDigits: 0,
-                  maximumFractionDigits: 0,
-                })}
-              </p>
-            </>
-          ) : (
-            "Valor não divulgado"
-          )}
-        </p>
+        {budget > 0 ? (
+          <>
+            <p>
+              {budget.toLocaleString("pt-BR", {
+                style: "currency",
+                currency: "BRL",
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0,
+              })}
+            </p>
+          </>
+        ) : (
+          "Valor não divulgado"
+        )}
       </div>
       <div className={styles.item}>
         <p>Valor da receita: </p>

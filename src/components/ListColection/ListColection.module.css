@@ -1,0 +1,11 @@
+.container_collection ul {
+  width: 90%;
+}
+.container_collection ul:not(:has(li:nth-child(2))) li {
+  max-width: 30%;
+}
+@media (max-width: 850px) {
+  .container_collection ul:not(:has(li:nth-child(2))) li {
+    max-width: 100%;
+  }
+}

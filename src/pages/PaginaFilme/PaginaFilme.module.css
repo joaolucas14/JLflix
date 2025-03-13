@@ -35,11 +35,6 @@
   padding: 50px;
 }
 
-.crew {
-  background-color: darkred;
-  width: 30%;
-  align-self: flex-end; /* Alinha à direita */
-}
 .cast {
   background-color: darkred;
   width: 30%;

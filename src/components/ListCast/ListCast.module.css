@@ -1,8 +1,8 @@
-.pais_receita {
-  align-self: flex-start;
+.cast {
   display: flex;
   flex-direction: column;
   background-color: #001a66; /* Azul escuro mais elegante */
+  align-self: flex-end; /* Alinha à direita */
   width: 40%;
   min-width: 320px;
   padding: 20px;
@@ -12,7 +12,7 @@
   box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-.pais_receita h2 {
+.cast h2 {
   margin: 0px 0px 15px 0px;
   font-size: 1.6em;
   font-weight: bold;
@@ -20,7 +20,7 @@
   padding-bottom: 5px;
 }
 
-.item {
+.cast_list {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -29,21 +29,28 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.item:last-child {
+.cast_list img {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: white solid 2px;
+}
+
+.cast_list img:hover {
+  transform: scale(1.5);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cast_list:last-child {
   border-bottom: none;
 }
 
-.item p {
-  margin: 0px;
-  font-size: 1.1em;
-}
-
-.item p:first-child {
+.cast_list p:first-child {
   font-weight: bold;
 }
-
 @media (max-width: 1000px) {
-  .pais_receita {
+  .cast {
     align-self: center;
   }
 }
