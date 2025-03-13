@@ -4,12 +4,11 @@ import useFilme from "../../states/useFilme";
 import styles from "./PaginaFilme.module.css";
 import StarRating from "../../components/StarRating";
 import useColecaoFilme from "../../states/useColecaoFilme";
-import MovieCard from "../../components/MovieCard";
-import ContainerMovieList from "../../components/ContainerMovieList";
 import useCreditosFilme from "../../states/useCreditosFilme";
 import InfoMovie from "../../components/InfoMovie";
 import ListProducer from "../../components/ListProducer";
 import ListCast from "../../components/ListCast";
+import ListColection from "../../components/ListColection";
 
 export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
@@ -79,23 +78,7 @@ export default function PaginaFilme() {
               </>
             )}
 
-            {colecao && (
-              <div className={styles.container_collection}>
-                <h1>Filmes da Franquia</h1>
-                <ContainerMovieList>
-                  {colecao.parts
-                    .filter((filme) => filme.id !== Number(id))
-                    .sort(
-                      (a, b) =>
-                        new Date(a.release_date).getTime() -
-                        new Date(b.release_date).getTime()
-                    )
-                    .map((filme) => (
-                      <MovieCard key={filme.id} {...filme} />
-                    ))}
-                </ContainerMovieList>
-              </div>
-            )}
+            {colecao && <ListColection id={filme.id} />}
           </div>
         </>
       )}
