@@ -1,4 +1,5 @@
 import { IFilmeDetalhes } from "../../interfaces/IFilmeDetalhes";
+import ContainerInfoMovies from "../ContainerInfoMovies";
 import styles from "./Infomovie.module.css";
 export default function InfoMovie({
   origin_country,
@@ -6,8 +7,7 @@ export default function InfoMovie({
   revenue,
 }: IFilmeDetalhes) {
   return (
-    <div className={styles.pais_receita}>
-      <h2>Valores</h2>
+    <ContainerInfoMovies titulo="Valores" direita={false}>
       <div className={styles.item}>
         <p>País das gravações: </p>
 
@@ -49,6 +49,6 @@ export default function InfoMovie({
           "Valor não divulgado"
         )}
       </div>
-    </div>
+    </ContainerInfoMovies>
   );
 }

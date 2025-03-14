@@ -1,0 +1,26 @@
+.container {
+  background-size: cover;
+  background-position: center top;
+  padding: 20px;
+  color: white;
+  height: 500px;
+}
+.infos {
+  margin-top: 7%;
+  width: 30%;
+  padding: 5px 20px;
+  background-color: rgba(0, 0, 0, 0.3);
+  min-width: 300px;
+  box-shadow: -2px -1px 1px #00000045;
+}
+
+.title {
+  font-size: 2rem;
+  margin: 0px;
+}
+
+.detalhes_info {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
