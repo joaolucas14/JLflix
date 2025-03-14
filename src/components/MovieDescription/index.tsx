@@ -32,6 +32,11 @@ export default function MovieDescription(filme: IFilmeDetalhes) {
           )}
         </div>
         <p>{filme.overview}</p>
+        {filme.homepage && (
+          <a className={styles.homepage} href={filme.homepage} target="_blank">
+            Página do Filme
+          </a>
+        )}
       </div>
     </div>
   );

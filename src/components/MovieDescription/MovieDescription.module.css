@@ -24,3 +24,9 @@
   justify-content: space-between;
   flex-wrap: nowrap;
 }
+
+.homepage {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
