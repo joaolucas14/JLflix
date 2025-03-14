@@ -1,10 +1,10 @@
 import { ICreditos } from "../../interfaces/ICreditos";
+import ContainerInfoMovies from "../ContainerInfoMovies";
 import styles from "./ListProducer.module.css";
 
 export default function ListProducer({ crew }: ICreditos) {
   return (
-    <div className={styles.crew}>
-      <h2>Direção e Produção:</h2>
+    <ContainerInfoMovies titulo="Direção e Produção:" direita={false}>
       {crew
         .filter(
           (member, index, self) =>
@@ -26,6 +26,6 @@ export default function ListProducer({ crew }: ICreditos) {
             )}
           </div>
         ))}
-    </div>
+    </ContainerInfoMovies>
   );
 }

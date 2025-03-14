@@ -1,10 +1,10 @@
 import { ICreditos } from "../../interfaces/ICreditos";
+import ContainerInfoMovies from "../ContainerInfoMovies";
 import styles from "./ListCast.module.css";
 
 export default function ListCast({ cast }: ICreditos) {
   return (
-    <div className={styles.cast}>
-      <h2>Elenco</h2>
+    <ContainerInfoMovies titulo="Atores" direita={true}>
       {cast.slice(0, 5).map((ator) => (
         <div key={ator.id} className={styles.cast_list}>
           <p className={styles.cast_name}>
@@ -17,6 +17,6 @@ export default function ListCast({ cast }: ICreditos) {
           />
         </div>
       ))}
-    </div>
+    </ContainerInfoMovies>
   );
 }
