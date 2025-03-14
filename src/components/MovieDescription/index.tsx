@@ -1,8 +1,12 @@
 import { IFilmeDetalhes } from "../../interfaces/IFilmeDetalhes";
+// import useProvider from "../../states/useProvider";
 import MovieGenrer from "../MovieGenrer";
+import ProviderList from "../ProviderList";
 import StarRating from "../StarRating";
 import styles from "./MovieDescription.module.css";
 export default function MovieDescription(filme: IFilmeDetalhes) {
+  // const { provider } = useProvider();
+
   return (
     <div
       style={{
@@ -32,11 +36,13 @@ export default function MovieDescription(filme: IFilmeDetalhes) {
           )}
         </div>
         <p>{filme.overview}</p>
+
         {filme.homepage && (
           <a className={styles.homepage} href={filme.homepage} target="_blank">
             Página do Filme
           </a>
         )}
+        <ProviderList />
       </div>
     </div>
   );

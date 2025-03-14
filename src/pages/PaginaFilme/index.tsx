@@ -9,18 +9,21 @@ import ListProducer from "../../components/ListProducer";
 import ListCast from "../../components/ListCast";
 import ListColection from "../../components/ListColection";
 import MovieDescription from "../../components/MovieDescription";
+import useProvider from "../../states/useProvider";
 
 export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
   const { buscarFilme, filme } = useFilme();
   const { buscarColecao, colecao, setColecao } = useColecaoFilme();
   const { buscarCreditos, creditos } = useCreditosFilme();
+  const { buscarProvider } = useProvider();
   const isCollection = filme?.belongs_to_collection?.id;
 
   useEffect(() => {
     if (id) {
       buscarFilme(id);
       buscarCreditos(id);
+      buscarProvider(id);
       setColecao(null);
     }
   }, [id]); // Busca o filme apenas quando o ID mudar
