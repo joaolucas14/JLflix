@@ -2,4 +2,12 @@
   display: flex;
   justify-content: flex-end;
   gap: 10px;
+  width: 30%;
+  margin-left: auto;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    margin: auto;
+  }
 }
