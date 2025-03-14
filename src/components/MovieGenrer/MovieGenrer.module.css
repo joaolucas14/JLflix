@@ -9,5 +9,6 @@
 @media (max-width: 1000px) {
   .container {
     margin: auto;
+    justify-content: center;
   }
 }
