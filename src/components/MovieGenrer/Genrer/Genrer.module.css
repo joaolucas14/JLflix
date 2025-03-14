@@ -1,0 +1,18 @@
+.genrer {
+  background-color: darkblue;
+  padding: 5px 20px;
+  border-radius: 20px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+}
+
+.genrer:hover {
+  opacity: 1;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.genrer p {
+  margin: 0px;
+}
