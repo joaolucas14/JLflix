@@ -1,6 +1,7 @@
 .movie-rate {
   display: flex;
   gap: 4px;
+  flex-wrap: nowrap;
 }
 
 svg {

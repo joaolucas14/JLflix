@@ -10,11 +10,13 @@ export default function ListCast({ cast }: ICreditos) {
           <p className={styles.cast_name}>
             {`${ator.name}: ${ator.character}`}
           </p>
-          <img
-            src={`https://image.tmdb.org/t/p/w200${ator.profile_path}`}
-            alt={ator.name}
-            className={styles.cast_image}
-          />
+          {ator.profile_path && (
+            <img
+              src={`https://image.tmdb.org/t/p/w200${ator.profile_path}`}
+              alt={ator.name}
+              className={styles.cast_image}
+            />
+          )}
         </div>
       ))}
     </ContainerInfoMovies>
