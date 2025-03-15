@@ -7,7 +7,7 @@ export default function InfoMovie({
   revenue,
 }: IFilmeDetalhes) {
   return (
-    <ContainerInfoMovies titulo="Valores" direita={false}>
+    <ContainerInfoMovies titulo="Valores" direita={true}>
       <div className={styles.item}>
         <p>País das gravações: </p>
 

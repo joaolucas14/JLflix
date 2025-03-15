@@ -10,5 +10,8 @@
   .container {
     margin: auto;
     justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 100%;
   }
 }
