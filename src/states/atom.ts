@@ -4,6 +4,7 @@ import { IFilmeDetalhes } from "../interfaces/IFilmeDetalhes";
 import { IColecao } from "../interfaces/IColecao";
 import { ICreditos } from "../interfaces/ICreditos";
 import { IProviders } from "../interfaces/IProviders";
+import { ITrailer } from "../interfaces/ITrailer";
 
 export const listaFilmesState = atom<IFilme[] | null>({
   key: "listaFilmesState",
@@ -28,4 +29,9 @@ export const creditosFilmesState = atom<ICreditos | null>({
 export const providerFilmeState = atom<IProviders | null>({
   key: "providerFilmeState",
   default: null,
+});
+
+export const trailerFilmeState = atom<ITrailer[]>({
+  key: "trailerFilmeState",
+  default: [],
 });
