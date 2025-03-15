@@ -49,14 +49,15 @@ export default function PaginaFilme() {
         <>
           <MovieDescription {...filme} />
           <div className={styles.detalhes}>
-            <Trailer trailers={trailer} tagline={filme.tagline} />
-            <InfoMovie {...filme} />
+            {trailer && <Trailer trailers={trailer} tagline={filme.tagline} />}
+
             {creditos && (
               <>
                 <ListCast {...creditos} />
                 <ListProducer {...creditos} />
               </>
             )}
+            <InfoMovie {...filme} />
 
             {colecao && <ListColection id={filme.id} />}
           </div>

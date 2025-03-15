@@ -1,4 +1,5 @@
 import { ITrailer } from "../../interfaces/ITrailer";
+import ContainerInfoMovies from "../ContainerInfoMovies";
 import styles from "./Trailer.module.css";
 
 interface TrailerProps {
@@ -21,12 +22,10 @@ export default function Trailer({ trailers, tagline }: TrailerProps) {
     trailersPt.length > 0 ? trailersPt[0] : sortedTrailers[0];
 
   return (
-    <div>
-      <h3>Último Trailer:</h3>
+    <ContainerInfoMovies titulo="Trailer" direita={false}>
       {tagline}
-
       <iframe
-        width="42%"
+        width="100%"
         height="300"
         src={`https://www.youtube.com/embed/${latestTrailer.key}`}
         title={latestTrailer.name}
@@ -34,6 +33,6 @@ export default function Trailer({ trailers, tagline }: TrailerProps) {
         allowFullScreen
         className={styles.trailerFrame}
       ></iframe>
-    </div>
+    </ContainerInfoMovies>
   );
 }
