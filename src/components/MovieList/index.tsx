@@ -8,7 +8,7 @@ import MovieCard from "../MovieCard";
 import GenrerFilter from "../../GenrerFilter";
 
 export default function MovieList() {
-  const { listaFilmes, buscarFilmesPorNome } = useListaFilmes();
+  const { listaFilmes, buscarFilmesPorNome, buscarFilmes } = useListaFilmes();
   const [termoBusca, setTermoBusca] = useState("");
   const [filmesFiltrados, setFilmesFiltrados] = useState(listaFilmes);
 
@@ -36,7 +36,7 @@ export default function MovieList() {
         )
       );
     }
-
+    buscarFilmes();
     setFilmesFiltrados(filmes);
   }, [listaFilmes, generosAtivos]); // Atualiza corretamente quando a lista de filmes ou os filtros mudam
 

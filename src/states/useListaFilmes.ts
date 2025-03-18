@@ -78,5 +78,5 @@ export default function useListaFilmes() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [carregando]);
 
-  return { listaFilmes, buscarFilmesPorNome };
+  return { listaFilmes, buscarFilmesPorNome, buscarFilmes };
 }

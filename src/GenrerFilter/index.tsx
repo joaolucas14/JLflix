@@ -29,6 +29,9 @@ export default function GenrerFilter() {
           value={gen.id}
           key={gen.id}
           onClick={(e) => handleClick(e.currentTarget.value)}
+          className={`${styles.btn} ${
+            generosAtivos.includes(String(gen.id)) ? styles.ativo : ""
+          }`}
         >
           {gen.name}
         </button>
