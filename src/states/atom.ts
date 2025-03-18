@@ -41,3 +41,8 @@ export const generosFilmeState = atom<IGenero[]>({
   key: "generosFilmeState",
   default: [],
 });
+
+export const generosAtivosFiltroState = atom<string[]>({
+  key: "generosAtivosFiltroState",
+  default: [],
+});

@@ -4,6 +4,7 @@ interface IFilme {
   overview: string;
   vote_average: string;
   poster_path: string;
+  genre_ids: number[];
 }
 
 export default IFilme;
