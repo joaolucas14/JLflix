@@ -8,9 +8,9 @@ import MovieCard from "../MovieCard";
 import GenrerFilter from "../../GenrerFilter";
 
 export default function MovieList() {
-  const { listaFilmes, buscarFilmesPorNome, buscarFilmes } = useListaFilmes();
+  const { listaFilmes, buscarFilmesPorNome, buscarFilmesPorGenero } =
+    useListaFilmes();
   const [termoBusca, setTermoBusca] = useState("");
-  const [filmesFiltrados, setFilmesFiltrados] = useState(listaFilmes);
 
   // Pegando os gêneros ativos do Recoil
   const generosAtivos = useRecoilValue(generosAtivosFiltroState);
@@ -21,25 +21,9 @@ export default function MovieList() {
     setTermoBusca(valor);
     buscarFilmesPorNome(valor);
   };
-
-  // Recalcula os filmes filtrados sempre que `listaFilmes` ou `generosAtivos` mudar
   useEffect(() => {
-    if (!listaFilmes) return;
-
-    let filmes = listaFilmes;
-
-    // Filtra por gênero se houver algum ativo
-    if (generosAtivos.length > 0) {
-      filmes = filmes.filter((filme) =>
-        filme.genre_ids.some((genero: number) =>
-          generosAtivos.includes(String(genero))
-        )
-      );
-    }
-    buscarFilmes();
-    setFilmesFiltrados(filmes);
-  }, [listaFilmes, generosAtivos]); // Atualiza corretamente quando a lista de filmes ou os filtros mudam
-
+    buscarFilmesPorGenero();
+  }, [generosAtivos]);
   return (
     <div>
       <input
@@ -49,25 +33,13 @@ export default function MovieList() {
         value={termoBusca}
         onChange={handleChange}
       />
-
       {/* Filtro de Gênero */}
       <GenrerFilter />
-      {generosAtivos.length > 0 && (
-        <div className={styles.genreContainer}>
-          {generosAtivos.map((genero) => (
-            <span key={genero} className={styles.genre}>
-              {genero}
-            </span>
-          ))}
-        </div>
-      )}
-
-      {/* Lista de filmes filtrados */}
       <ContainerMovieList>
-        {filmesFiltrados!.length > 0 ? (
-          filmesFiltrados!.map((filme) => (
-            <MovieCard key={filme.id} {...filme} />
-          ))
+        {listaFilmes && listaFilmes.length > 0 ? (
+          Array.from(new Set(listaFilmes.map((filme) => filme.id)))
+            .map((id) => listaFilmes.find((filme) => filme.id === id))
+            .map((filme) => <MovieCard key={filme!.id} {...filme!} />)
         ) : (
           <p style={{ textAlign: "center", fontSize: "18px" }}>
             Nenhum filme encontrado.

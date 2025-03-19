@@ -1,25 +1,40 @@
 import { useRecoilState } from "recoil";
-import { listaFilmesState } from "./atom";
+import { generosAtivosFiltroState, listaFilmesState } from "./atom";
 import http from "../api";
 import { useEffect, useState, useRef } from "react";
 import IFilme from "../interfaces/IFilme";
 
 export default function useListaFilmes() {
   const [listaFilmes, setListaFilmes] = useRecoilState(listaFilmesState);
+  const [generosSelecionados, setGenerosSelecionados] = useRecoilState(
+    generosAtivosFiltroState
+  );
   const [pagina, setPagina] = useState(1);
   const [carregando, setCarregando] = useState(false);
+  const [termoBusca, setTermoBusca] = useState("");
   const carregandoRef = useRef(false);
 
-  async function buscarFilmes() {
+  async function buscarFilmes(paginaAtual = 1) {
     if (carregando || carregandoRef.current) return;
 
     try {
       setCarregando(true);
       carregandoRef.current = true;
 
-      const resposta = await http.get("discover/movie", {
-        params: { page: pagina },
-      });
+      const params: Record<string, string | number> = { page: paginaAtual };
+
+      // Se houver gêneros selecionados, busca por gênero
+      if (generosSelecionados.length > 0) {
+        params.with_genres = generosSelecionados.join(",");
+      }
+
+      // Se houver um termo de busca, filtra dentro do gênero
+      if (termoBusca) {
+        params.query = termoBusca;
+      }
+
+      const url = termoBusca ? "search/movie" : "discover/movie";
+      const resposta = await http.get(url, { params });
 
       const novosFilmes = resposta.data.results.filter(
         (filme: IFilme) =>
@@ -27,7 +42,7 @@ export default function useListaFilmes() {
       );
 
       setListaFilmes((prevFilmes) => [...(prevFilmes || []), ...novosFilmes]);
-      setPagina((prevPagina) => prevPagina + 1);
+      setPagina(paginaAtual + 1);
     } catch (erro) {
       console.error("Erro ao conectar à API:", erro);
     } finally {
@@ -36,27 +51,18 @@ export default function useListaFilmes() {
     }
   }
 
-  async function buscarFilmesPorNome(termo: string) {
-    if (!termo) {
-      // Se o termo estiver vazio, volta à lista original
-      setListaFilmes([]);
-      setPagina(1);
-      buscarFilmes();
-      return;
-    }
+  function buscarFilmesPorNome(termo: string) {
+    setTermoBusca(termo);
+    setListaFilmes([]); // Reseta a lista para evitar mistura
+    setPagina(1);
+    buscarFilmes(1);
+  }
 
-    try {
-      setCarregando(true);
-      const resposta = await http.get("search/movie", {
-        params: { query: termo },
-      });
-
-      setListaFilmes(resposta.data.results);
-    } catch (erro) {
-      console.error("Erro ao buscar filmes por nome:", erro);
-    } finally {
-      setCarregando(false);
-    }
+  function buscarFilmesPorGenero() {
+    setGenerosSelecionados(generosSelecionados);
+    setListaFilmes([]); // Reseta a lista para evitar mistura
+    setPagina(1);
+    buscarFilmes(1);
   }
 
   useEffect(() => {
@@ -70,7 +76,7 @@ export default function useListaFilmes() {
       const alturaVisivel = window.innerHeight;
 
       if (scrollY + alturaVisivel >= alturaTotal - 200) {
-        buscarFilmes();
+        buscarFilmes(pagina);
       }
     };
 
@@ -78,5 +84,10 @@ export default function useListaFilmes() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [carregando]);
 
-  return { listaFilmes, buscarFilmesPorNome, buscarFilmes };
+  return {
+    listaFilmes,
+    buscarFilmesPorNome,
+    buscarFilmesPorGenero,
+    buscarFilmes,
+  };
 }

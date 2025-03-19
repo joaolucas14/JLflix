@@ -19,7 +19,6 @@ export default function GenrerFilter() {
           ? atual.filter((g) => g !== genero) // Remove se já estiver ativo
           : [...atual, genero] // Adiciona se não estiver ativo
     );
-    console.log(generosAtivos);
   }
 
   return (
