@@ -1,8 +1,8 @@
 import { useEffect } from "react";
-import useGenerosFilme from "../states/useGenerosFilme";
+import useGenerosFilme from "../../states/useGenerosFilme";
 import styles from "./GenrerFilter.module.css";
 import { useRecoilState } from "recoil";
-import { generosAtivosFiltroState } from "../states/atom";
+import { generosAtivosFiltroState } from "../../states/atom";
 
 export default function GenrerFilter() {
   const { buscarGeneros, generos } = useGenerosFilme();

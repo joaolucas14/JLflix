@@ -46,3 +46,8 @@ export const generosAtivosFiltroState = atom<string[]>({
   key: "generosAtivosFiltroState",
   default: [],
 });
+
+export const listaProvidersState = atom<IProviders[]>({
+  key: "listaProvidersState",
+  default: [],
+});

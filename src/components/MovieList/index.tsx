@@ -5,7 +5,7 @@ import useListaFilmes from "../../states/useListaFilmes";
 import ContainerMovieList from "../ContainerMovieList";
 import styles from "./MovieList.module.css";
 import MovieCard from "../MovieCard";
-import GenrerFilter from "../../GenrerFilter";
+import GenrerFilter from "../GenrerFilter";
 
 export default function MovieList() {
   const { listaFilmes, buscarFilmesPorNome, buscarFilmesPorGenero } =

@@ -3,6 +3,7 @@ import PaginaPadrao from "./pages/PaginaPadrao";
 import PaginaInicial from "./pages/PaginaInicial";
 import { RecoilRoot } from "recoil";
 import PaginaFilme from "./pages/PaginaFilme";
+import PaginaProvider from "./pages/PaginaProvider";
 
 function Rotas() {
   return (
@@ -12,6 +13,7 @@ function Rotas() {
           <Route path="/" element={<PaginaPadrao />}>
             <Route index element={<PaginaInicial />} />
             <Route path="filme/:id" element={<PaginaFilme />} />
+            <Route path="provider/:id" element={<PaginaProvider />} />
           </Route>
         </Routes>
       </Router>
