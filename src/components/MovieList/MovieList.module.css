@@ -6,3 +6,8 @@
   border: 1px solid #ccc;
   margin-bottom: 20px;
 }
+
+.filme_NotFound {
+  text-align: center;
+  font-size: 40px;
+}

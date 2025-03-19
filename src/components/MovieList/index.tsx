@@ -41,9 +41,7 @@ export default function MovieList() {
             .map((id) => listaFilmes.find((filme) => filme.id === id))
             .map((filme) => <MovieCard key={filme!.id} {...filme!} />)
         ) : (
-          <p style={{ textAlign: "center", fontSize: "18px" }}>
-            Nenhum filme encontrado.
-          </p>
+          <p className={styles.filme_NotFound}>Nenhum filme encontrado 📺.</p>
         )}
       </ContainerMovieList>
     </div>
