@@ -1,0 +1,53 @@
+.container {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 83%;
+  margin: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 20px;
+  position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: darkblue transparent;
+}
+
+.container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: darkblue;
+  border-radius: 10px;
+}
+
+.container:hover::-webkit-scrollbar-thumb {
+  background: darkblue;
+}
+
+.btn {
+  background-color: darkblue;
+  padding: 5px 20px;
+  border-radius: 20px;
+  opacity: 0.8;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  color: white;
+  border: none;
+}
+
+.btn:hover {
+  opacity: 1;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.ativo {
+  background-color: white;
+  color: darkblue;
+}

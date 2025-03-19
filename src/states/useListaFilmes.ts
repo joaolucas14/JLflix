@@ -1,76 +1,93 @@
 import { useRecoilState } from "recoil";
-import { listaFilmesState } from "./atom";
+import { generosAtivosFiltroState, listaFilmesState } from "./atom";
 import http from "../api";
 import { useEffect, useState, useRef } from "react";
 import IFilme from "../interfaces/IFilme";
 
 export default function useListaFilmes() {
   const [listaFilmes, setListaFilmes] = useRecoilState(listaFilmesState);
+  const [generosSelecionados, setGenerosSelecionados] = useRecoilState(
+    generosAtivosFiltroState
+  );
   const [pagina, setPagina] = useState(1);
   const [carregando, setCarregando] = useState(false);
-  const carregandoRef = useRef(false); // UseRef para evitar múltiplas requisições simultâneas
+  const [termoBusca, setTermoBusca] = useState("");
+  const carregandoRef = useRef(false);
 
-  // const filmesPorPagina = 20;  Número de filmes por página
-
-  async function buscarFilmes() {
-    // Verifica se já está carregando, se sim, não faz outra requisição
+  async function buscarFilmes(paginaAtual = 1) {
     if (carregando || carregandoRef.current) return;
 
     try {
       setCarregando(true);
-      carregandoRef.current = true; // Marca que está carregando
+      carregandoRef.current = true;
 
-      // Faz a requisição para a API com o número da página
-      const resposta = await http.get("discover/movie", {
-        params: {
-          page: pagina, // Número da página
-        },
-      });
-      // Filtra os filmes duplicados (caso já existam na lista)
+      const params: Record<string, string | number> = { page: paginaAtual };
+
+      // Se houver gêneros selecionados, busca por gênero
+      if (generosSelecionados.length > 0) {
+        params.with_genres = generosSelecionados.join(",");
+      }
+
+      // Se houver um termo de busca, filtra dentro do gênero
+      if (termoBusca) {
+        params.query = termoBusca;
+      }
+
+      const url = termoBusca ? "search/movie" : "discover/movie";
+      const resposta = await http.get(url, { params });
+
       const novosFilmes = resposta.data.results.filter(
         (filme: IFilme) =>
           !(listaFilmes ?? []).some((f: IFilme) => f.id === filme.id)
       );
 
-      // Adiciona os filmes da resposta ao estado, sem sobrescrever os filmes existentes
       setListaFilmes((prevFilmes) => [...(prevFilmes || []), ...novosFilmes]);
-
-      // Atualiza a página para a próxima
-      setPagina((prevPagina) => prevPagina + 1);
+      setPagina(paginaAtual + 1);
     } catch (erro) {
       console.error("Erro ao conectar à API:", erro);
     } finally {
       setCarregando(false);
-      carregandoRef.current = false; // Libera a flag de carregamento
+      carregandoRef.current = false;
     }
   }
 
+  function buscarFilmesPorNome(termo: string) {
+    setTermoBusca(termo);
+    setListaFilmes([]); // Reseta a lista para evitar mistura
+    setPagina(1);
+    buscarFilmes(1);
+  }
+
+  function buscarFilmesPorGenero() {
+    setGenerosSelecionados(generosSelecionados);
+    setListaFilmes([]); // Reseta a lista para evitar mistura
+    setPagina(1);
+    buscarFilmes(1);
+  }
+
   useEffect(() => {
-    // Inicializa a busca ao carregar a página
     buscarFilmes();
-  }, []); // Chama a função uma vez ao montar o componente
+  }, []);
 
   useEffect(() => {
-    // Detecta o scroll para carregar mais filmes
     const handleScroll = () => {
-      const scrollY = window.scrollY; // Posição vertical do scroll
-      const alturaTotal = document.documentElement.scrollHeight; // Altura total do documento
-      const alturaVisivel = window.innerHeight; // Altura visível da janela
+      const scrollY = window.scrollY;
+      const alturaTotal = document.documentElement.scrollHeight;
+      const alturaVisivel = window.innerHeight;
 
-      // Verifica se o usuário está perto do final da página (por exemplo, 200px antes do fim)
       if (scrollY + alturaVisivel >= alturaTotal - 200) {
-        buscarFilmes();
+        buscarFilmes(pagina);
       }
     };
 
-    // Adiciona o ouvinte de scroll
     window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [carregando]);
 
-    // Remove o ouvinte de scroll ao desmontar o componente
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [carregando]); // O efeito é re-executado sempre que `carregando` mudar
-
-  return { listaFilmes, buscarFilmes };
+  return {
+    listaFilmes,
+    buscarFilmesPorNome,
+    buscarFilmesPorGenero,
+    buscarFilmes,
+  };
 }

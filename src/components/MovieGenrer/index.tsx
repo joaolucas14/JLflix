@@ -1,5 +1,5 @@
 import { IFilmeDetalhes } from "../../interfaces/IFilmeDetalhes";
-import Genrer from "./Genrer";
+import Genrer from "../Genrer";
 import styles from "./MovieGenrer.module.css";
 
 export default function MovieGenrer(filme: IFilmeDetalhes) {

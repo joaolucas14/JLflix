@@ -47,14 +47,14 @@
 }
 
 .btn_default {
-  background-color: #6046fe;
+  background-color: darkblue;
   padding: 6px 8px;
   border-radius: 4px;
   margin-top: 10px;
   color: #fff;
   border: none;
   cursor: pointer;
-  width: 100%;
+  width: 95%;
 }
 
 .movie_card:hover .hidden_content {
