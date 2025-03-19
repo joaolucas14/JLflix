@@ -1,5 +1,5 @@
-import useColecaoFilme from "../../states/useColecaoFilme";
 // import useFilme from "../../states/useFilme";
+import useColecaoFilme from "../../states/hooks/movies/useColecaoFilme";
 import ContainerMovieList from "../ContainerMovieList";
 import MovieCard from "../MovieCard";
 import styles from "./ListColection.module.css";

@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
-import { trailerFilmeState } from "./atom";
-import http from "../api";
+import http from "../../../api";
+import { trailerFilmeState } from "../../atom";
 
 export default function useTrailerFilme() {
   const [trailer, setTrailer] = useRecoilState(trailerFilmeState);

@@ -1,8 +1,8 @@
-import useProvider from "../../states/useProvider";
+import useFilmeProvider from "../../states/hooks/movies/useFilmeProvider";
 import styles from "./ProviderList.module.css";
 
 export default function ProviderList() {
-  const { provider } = useProvider();
+  const { provider } = useFilmeProvider();
 
   return (
     <div>

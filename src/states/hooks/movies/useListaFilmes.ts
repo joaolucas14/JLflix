@@ -1,8 +1,8 @@
 import { useRecoilState } from "recoil";
-import { generosAtivosFiltroState, listaFilmesState } from "./atom";
-import http from "../api";
+import http from "../../../api";
 import { useEffect, useState, useRef } from "react";
-import IFilme from "../interfaces/IFilme";
+import { generosAtivosFiltroState, listaFilmesState } from "../../atom";
+import IFilme from "../../../interfaces/IFilme";
 
 export default function useListaFilmes() {
   const [listaFilmes, setListaFilmes] = useRecoilState(listaFilmesState);

@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
-import { creditosFilmesState } from "./atom";
-import http from "../api";
+import http from "../../../api";
+import { creditosFilmesState } from "../../atom";
 
 export default function useCreditosFilme() {
   const [creditos, setCreditos] = useRecoilState(creditosFilmesState);
