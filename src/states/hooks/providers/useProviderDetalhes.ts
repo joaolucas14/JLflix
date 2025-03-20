@@ -4,8 +4,8 @@ import http from "../../../api";
 import { providerDetalhesState } from "../../atom";
 import IFilme from "../../../interfaces/IFilme";
 
-export default function useProviderDetalhes() {
-  const [providerDetalhes, setProviderDetalhes] = useRecoilState(
+export default function useProviderFilmes() {
+  const [providerFilmes, setProviderFilmes] = useRecoilState(
     providerDetalhesState
   );
   const [pagina, setPagina] = useState(1);
@@ -16,17 +16,14 @@ export default function useProviderDetalhes() {
   const [totalPaginas, setTotalPaginas] = useState(1);
   const carregandoRef = useRef(false);
 
-  async function buscarDetalhesProvider(
-    newProviderId: string,
-    paginaAtual = 1
-  ) {
+  async function buscarProviderFilmes(newProviderId: string, paginaAtual = 1) {
     if (carregandoRef.current) return;
 
     // Reseta estado se o provider mudar
     if (currentProviderId !== newProviderId) {
       setCurrentProviderId(newProviderId);
       setPagina(1);
-      setProviderDetalhes([]);
+      setProviderFilmes([]);
       setTotalPaginas(1);
       paginaAtual = 1;
     }
@@ -50,7 +47,7 @@ export default function useProviderDetalhes() {
       setTotalPaginas(resposta.data.total_pages);
 
       // Remove duplicatas e atualiza estado
-      setProviderDetalhes((prev) => {
+      setProviderFilmes((prev) => {
         const existingIds = new Set(prev.map((movie) => movie.id));
         const newMovies = resposta.data.results.filter(
           (movie: IFilme) => !existingIds.has(movie.id)
@@ -78,7 +75,7 @@ export default function useProviderDetalhes() {
       const alturaVisivel = window.innerHeight;
 
       if (scrollY + alturaVisivel >= alturaTotal - 200 && currentProviderId) {
-        buscarDetalhesProvider(currentProviderId, pagina);
+        buscarProviderFilmes(currentProviderId, pagina);
       }
     }
 
@@ -86,5 +83,9 @@ export default function useProviderDetalhes() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, [carregando, pagina, currentProviderId]);
 
-  return { buscarDetalhesProvider, providerDetalhes, setProviderDetalhes };
+  return {
+    buscarDetalhesProvider: buscarProviderFilmes,
+    providerFilmes,
+    setProviderFilmes,
+  };
 }
