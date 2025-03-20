@@ -66,10 +66,6 @@ export default function useListaFilmes() {
   }
 
   useEffect(() => {
-    buscarFilmes();
-  }, []);
-
-  useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
       const alturaTotal = document.documentElement.scrollHeight;

@@ -1,8 +1,8 @@
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import useProviderDetalhes from "../../states/hooks/providers/useProviderDetalhes";
-import ContainerMovieList from "../../components/ContainerMovieList";
-import MovieCard from "../../components/MovieCard";
+import styles from "./PaginaProvier.module.css";
+import MovieList from "../../components/MovieList";
 
 export default function PaginaProvider() {
   const { id } = useParams<{ id: string }>();
@@ -15,14 +15,11 @@ export default function PaginaProvider() {
   }, [id]);
 
   return (
-    <ContainerMovieList>
-      {providerDetalhes && providerDetalhes.length > 0 ? (
-        Array.from(new Set(providerDetalhes.map((filme) => filme.id)))
-          .map((id) => providerDetalhes.find((filme) => filme.id === id))
-          .map((filme) => <MovieCard key={filme!.id} {...filme!} />)
-      ) : (
-        <p>Nenhum filme encontrado 📺.</p>
-      )}
-    </ContainerMovieList>
+    <>
+      <h1>Filmes em alta</h1>
+      <div className={styles.container}>
+        <MovieList listaFilmes={providerDetalhes!} />
+      </div>
+    </>
   );
 }
