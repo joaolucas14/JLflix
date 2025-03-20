@@ -52,3 +52,8 @@ export const listaProvidersState = atom<IProviderList[]>({
   key: "listaProvidersState",
   default: [],
 });
+
+export const providerDetalhesState = atom<IFilme[]>({
+  key: "providerDetalhesState",
+  default: [],
+});
