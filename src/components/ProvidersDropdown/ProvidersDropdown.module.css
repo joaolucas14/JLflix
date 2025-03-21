@@ -21,7 +21,6 @@
   font-size: 13px;
   position: absolute;
   z-index: 1;
-  min-width: 200px;
   background-color: white;
   border: 2px solid darkblue;
   border-radius: 0px 15px 15px 15px;
@@ -62,5 +61,9 @@
 @media (max-width: 1000px) {
   .paste_button {
     margin: 0px;
+  }
+
+  .dropdown_content button {
+    width: 100%;
   }
 }
