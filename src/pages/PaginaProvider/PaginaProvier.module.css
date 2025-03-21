@@ -2,3 +2,8 @@
   padding: 20px;
   margin: 0px 100px;
 }
+@media (max-width: 1000px) {
+  .container {
+    margin: 0px 40px;
+  }
+}
