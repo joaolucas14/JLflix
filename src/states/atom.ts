@@ -57,3 +57,8 @@ export const providerDetalhesState = atom<IFilme[]>({
   key: "providerDetalhesState",
   default: [],
 });
+
+export const providerAtivoState = atom<IProviderList | string>({
+  key: "providerAtivoState",
+  default: "Streaming",
+});
