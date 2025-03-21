@@ -6,6 +6,7 @@ import { ICreditos } from "../interfaces/ICreditos";
 import { IProviders } from "../interfaces/IProviders";
 import { ITrailer } from "../interfaces/ITrailer";
 import { IGenero } from "../interfaces/IGenero";
+import { IProviderList } from "../interfaces/IProviderList";
 
 export const listaFilmesState = atom<IFilme[] | null>({
   key: "listaFilmesState",
@@ -45,4 +46,19 @@ export const generosFilmeState = atom<IGenero[]>({
 export const generosAtivosFiltroState = atom<string[]>({
   key: "generosAtivosFiltroState",
   default: [],
+});
+
+export const listaProvidersState = atom<IProviderList[]>({
+  key: "listaProvidersState",
+  default: [],
+});
+
+export const providerDetalhesState = atom<IFilme[]>({
+  key: "providerDetalhesState",
+  default: [],
+});
+
+export const providerAtivoState = atom<IProviderList | string>({
+  key: "providerAtivoState",
+  default: "Streaming",
 });

@@ -1,15 +1,19 @@
 import { useState, useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { generosAtivosFiltroState } from "../../states/atom"; // Importando os gêneros ativos do Recoil
-import useListaFilmes from "../../states/useListaFilmes";
 import ContainerMovieList from "../ContainerMovieList";
 import styles from "./MovieList.module.css";
 import MovieCard from "../MovieCard";
-import GenrerFilter from "../../GenrerFilter";
+import GenrerFilter from "../GenrerFilter";
+import useListaFilmes from "../../states/hooks/movies/useListaFilmes";
+import IFilme from "../../interfaces/IFilme";
 
-export default function MovieList() {
-  const { listaFilmes, buscarFilmesPorNome, buscarFilmesPorGenero } =
-    useListaFilmes();
+interface MovieListProps {
+  listaFilmes: IFilme[];
+}
+
+export default function MovieList({ listaFilmes }: MovieListProps) {
+  const { buscarFilmesPorNome, buscarFilmesPorGenero } = useListaFilmes();
   const [termoBusca, setTermoBusca] = useState("");
 
   // Pegando os gêneros ativos do Recoil

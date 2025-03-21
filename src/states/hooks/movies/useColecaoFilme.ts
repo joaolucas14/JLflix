@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
-import { colecaoFilmesState } from "./atom";
-import http from "../api";
+import http from "../../../api";
+import { colecaoFilmesState } from "../../atom";
 
 export default function useColecaoFilme() {
   const [colecao, setColecao] = useRecoilState(colecaoFilmesState);

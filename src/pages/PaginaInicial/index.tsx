@@ -1,15 +1,15 @@
-// import { useEffect } from "react";
 import MovieList from "../../components/MovieList";
-// import useGenerosFilme from "../../states/useGenerosFilme";
+import useListaFilmes from "../../states/hooks/movies/useListaFilmes";
 import styles from "./PaginaInicial.module.css";
 
 export default function PaginaInicial() {
+  const { listaFilmes } = useListaFilmes();
+
   return (
     <>
       <h1>Filmes em alta</h1>
-
       <div className={styles.container}>
-        <MovieList />
+        <MovieList listaFilmes={listaFilmes!} />
       </div>
     </>
   );

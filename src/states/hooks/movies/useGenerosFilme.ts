@@ -1,6 +1,6 @@
 import { useRecoilState } from "recoil";
-import http from "../api";
-import { generosFilmeState } from "./atom";
+import http from "../../../api";
+import { generosFilmeState } from "../../atom";
 
 export default function useGenerosFilme() {
   const [generos, setGeneros] = useRecoilState(generosFilmeState);

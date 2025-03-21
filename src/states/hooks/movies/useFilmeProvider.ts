@@ -1,8 +1,8 @@
 import { useRecoilState } from "recoil";
-import { providerFilmeState } from "./atom";
-import http from "../api";
+import { providerFilmeState } from "../../atom";
+import http from "../../../api";
 
-export default function useProvider() {
+export default function useFilmeProvider() {
   const [provider, setProvider] = useRecoilState(providerFilmeState);
   async function buscarProvider(id: string) {
     try {
