@@ -6,12 +6,12 @@ import MovieList from "../../components/MovieList";
 
 export default function PaginaProvider() {
   const { id } = useParams<{ id: string }>();
-  const { buscarDetalhesProvider, providerFilmes, setProviderFilmes } =
+  const { buscarProviderFilmes, providerFilmes, setProviderFilmes } =
     useProviderFilmes();
 
   useEffect(() => {
     setProviderFilmes([]);
-    buscarDetalhesProvider(id!);
+    buscarProviderFilmes(id!);
     console.log(providerFilmes);
   }, [id]);
 
