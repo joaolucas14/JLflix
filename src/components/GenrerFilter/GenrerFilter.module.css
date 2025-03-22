@@ -61,8 +61,29 @@
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 500px) {
   .container {
-    width: 90%;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    justify-content: center;
+    margin: auto;
+    white-space: nowrap;
+    padding: 20px;
+  }
+  .btn {
+    background-color: darkblue;
+    border-radius: 20px;
+    opacity: 0.8;
+    display: flex;
+    color: white;
+    border: none;
+    width: 130px;
+  }
+  .ativo {
+    background-color: white;
+    color: darkblue;
+    animation: ativoAnimation 1s ease-in-out;
   }
 }
