@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useRecoilValue } from "recoil";
 import { generosAtivosFiltroState } from "../../states/atom"; // Importando os gêneros ativos do Recoil
 import ContainerMovieList from "../ContainerMovieList";
@@ -13,30 +13,18 @@ interface MovieListProps {
 }
 
 export default function MovieList({ listaFilmes }: MovieListProps) {
-  const { buscarFilmesPorNome, buscarFilmesPorGenero } = useListaFilmes();
-  const [termoBusca, setTermoBusca] = useState("");
+  const { buscarFilmesPorGenero } = useListaFilmes();
 
   // Pegando os gêneros ativos do Recoil
   const generosAtivos = useRecoilValue(generosAtivosFiltroState);
 
   // Atualiza a busca por nome
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const valor = e.target.value;
-    setTermoBusca(valor);
-    buscarFilmesPorNome(valor);
-  };
+
   useEffect(() => {
     buscarFilmesPorGenero();
   }, [generosAtivos]);
   return (
     <div>
-      <input
-        className={styles.input}
-        type="text"
-        placeholder="Buscar filme..."
-        value={termoBusca}
-        onChange={handleChange}
-      />
       {/* Filtro de Gênero */}
       <GenrerFilter />
       <ContainerMovieList>
