@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import { useRecoilValue } from "recoil";
-import { generosAtivosFiltroState } from "../../states/atom"; // Importando os gêneros ativos do Recoil
+import { useRecoilState, useRecoilValue } from "recoil";
+import { generosAtivosFiltroState, termoBuscaState } from "../../states/atom"; // Importando os gêneros ativos do Recoil
 import ContainerMovieList from "../ContainerMovieList";
 import styles from "./MovieList.module.css";
 import MovieCard from "../MovieCard";
@@ -14,6 +14,7 @@ interface MovieListProps {
 
 export default function MovieList({ listaFilmes }: MovieListProps) {
   const { buscarFilmesPorGenero } = useListaFilmes();
+  const [termoBusca] = useRecoilState(termoBuscaState);
 
   // Pegando os gêneros ativos do Recoil
   const generosAtivos = useRecoilValue(generosAtivosFiltroState);
@@ -25,11 +26,18 @@ export default function MovieList({ listaFilmes }: MovieListProps) {
   }, [generosAtivos]);
   return (
     <div>
-      {/* Filtro de Gênero */}
       <GenrerFilter />
       <ContainerMovieList>
         {listaFilmes && listaFilmes.length > 0 ? (
-          Array.from(new Set(listaFilmes.map((filme) => filme.id)))
+          Array.from(
+            new Set(
+              listaFilmes
+                .filter((filme) =>
+                  filme.title.toLowerCase().includes(termoBusca.toLowerCase())
+                )
+                .map((filme) => filme.id)
+            )
+          )
             .map((id) => listaFilmes.find((filme) => filme.id === id))
             .map((filme) => <MovieCard key={filme!.id} {...filme!} />)
         ) : (
