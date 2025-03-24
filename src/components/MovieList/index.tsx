@@ -32,9 +32,18 @@ export default function MovieList({ listaFilmes }: MovieListProps) {
           Array.from(
             new Set(
               listaFilmes
-                .filter((filme) =>
-                  filme.title.toLowerCase().includes(termoBusca.toLowerCase())
-                )
+                .filter((filme) => {
+                  const matchesTitle = filme.title
+                    .toLowerCase()
+                    .includes(termoBusca.toLowerCase());
+                  const matchesGenre =
+                    generosAtivos.length === 0 ||
+                    (filme.genre_ids &&
+                      filme.genre_ids.some((genre) =>
+                        generosAtivos.includes(String(genre))
+                      ));
+                  return matchesTitle && matchesGenre;
+                })
                 .map((filme) => filme.id)
             )
           )
