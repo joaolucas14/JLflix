@@ -5,16 +5,16 @@
   gap: 16px;
   list-style: none;
   width: 100%;
+  justify-content: center;
 }
 
-.container_collection ul {
-  width: 90%;
+/* Ajusta o tamanho quando há apenas um item */
+.container:has(li:first-child:last-child) {
+  display: flex;
+  justify-content: center;
 }
-.container_collection ul:not(:has(li:nth-child(2))) li {
-  max-width: 30%;
-}
-@media (max-width: 850px) {
-  .container_collection ul:not(:has(li:nth-child(2))) li {
-    max-width: 100%;
-  }
+
+.container:has(li:first-child:last-child) li {
+  max-width: 250px; /* Define um tamanho máximo */
+  width: 100%;
 }

@@ -6,10 +6,13 @@ import { useRecoilState } from "recoil";
 export default function InputTextFilter() {
   const [termoBusca, setTermoBusca] = useRecoilState(termoBuscaState);
 
-  const { buscarFilmesPorNome } = useListaFilmes();
+  const { buscarFilmesPorNome, buscarFilmes } = useListaFilmes();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const valor = e.target.value;
+    if (valor) {
+      buscarFilmes();
+    }
     setTermoBusca(valor);
     buscarFilmesPorNome(valor);
   };
