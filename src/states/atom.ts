@@ -62,3 +62,8 @@ export const providerAtivoState = atom<IProviderList | string>({
   key: "providerAtivoState",
   default: "Streaming",
 });
+
+export const termoBuscaState = atom<string>({
+  key: "termoBuscaState",
+  default: "",
+});
