@@ -15,12 +15,8 @@ interface MovieListProps {
 export default function MovieList({ listaFilmes }: MovieListProps) {
   const { buscarFilmesPorGenero } = useListaFilmes();
   const [termoBusca] = useRecoilState(termoBuscaState);
-  // const [providerAtivo] = useRecoilState(providerAtivoState)
 
-  // Pegando os gêneros ativos do Recoil
   const generosAtivos = useRecoilValue(generosAtivosFiltroState);
-
-  // Atualiza a busca por nome
 
   useEffect(() => {
     buscarFilmesPorGenero();
