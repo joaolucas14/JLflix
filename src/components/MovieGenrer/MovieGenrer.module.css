@@ -5,6 +5,10 @@
   width: 30%;
   margin-left: auto;
 }
+.container a {
+  text-decoration: none;
+  color: white;
+}
 
 @media (max-width: 1000px) {
   .container {
