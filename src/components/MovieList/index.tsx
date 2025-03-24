@@ -15,6 +15,7 @@ interface MovieListProps {
 export default function MovieList({ listaFilmes }: MovieListProps) {
   const { buscarFilmesPorGenero } = useListaFilmes();
   const [termoBusca] = useRecoilState(termoBuscaState);
+  // const [providerAtivo] = useRecoilState(providerAtivoState)
 
   // Pegando os gêneros ativos do Recoil
   const generosAtivos = useRecoilValue(generosAtivosFiltroState);
@@ -29,26 +30,32 @@ export default function MovieList({ listaFilmes }: MovieListProps) {
       <GenrerFilter />
       <ContainerMovieList>
         {listaFilmes && listaFilmes.length > 0 ? (
-          Array.from(
-            new Set(
-              listaFilmes
-                .filter((filme) => {
-                  const matchesTitle = filme.title
-                    .toLowerCase()
-                    .includes(termoBusca.toLowerCase());
-                  const matchesGenre =
-                    generosAtivos.length === 0 ||
-                    (filme.genre_ids &&
-                      filme.genre_ids.some((genre) =>
-                        generosAtivos.includes(String(genre))
-                      ));
-                  return matchesTitle && matchesGenre;
-                })
-                .map((filme) => filme.id)
-            )
-          )
-            .map((id) => listaFilmes.find((filme) => filme.id === id))
-            .map((filme) => <MovieCard key={filme!.id} {...filme!} />)
+          (() => {
+            const filteredMovies = listaFilmes.filter((filme) => {
+              const matchesTitle = filme.title
+                .toLowerCase()
+                .includes(termoBusca.toLowerCase());
+              const matchesGenre =
+                generosAtivos.length === 0 ||
+                (filme.genre_ids &&
+                  filme.genre_ids.some((genre) =>
+                    generosAtivos.includes(String(genre))
+                  ));
+              return matchesTitle && matchesGenre;
+            });
+
+            const uniqueMovieIds = Array.from(
+              new Set(filteredMovies.map((filme) => filme.id))
+            );
+
+            const uniqueMovies = uniqueMovieIds.map((id) =>
+              listaFilmes.find((filme) => filme.id === id)
+            );
+
+            return uniqueMovies.map((filme) => (
+              <MovieCard key={filme!.id} {...filme!} />
+            ));
+          })()
         ) : (
           <p className={styles.filme_NotFound}>Nenhum filme encontrado 📺.</p>
         )}
