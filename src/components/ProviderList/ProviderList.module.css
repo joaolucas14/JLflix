@@ -3,14 +3,14 @@
   flex-direction: row;
   width: 100%;
   justify-content: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .item img {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 2px solid var(--corFontePrimaria);
 }
 
 .item img:hover {
@@ -30,8 +30,8 @@ h3 {
 .tooltipText {
   visibility: hidden;
   width: max-content;
-  background-color: darkblue;
-  color: #fff;
+  background-color: var(--corPrimaria);
+  color: var(--corFontePrimaria);
   text-align: center;
   padding: 5px 10px;
   border-radius: 5px;
