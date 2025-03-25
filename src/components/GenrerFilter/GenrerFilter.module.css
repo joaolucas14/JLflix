@@ -9,7 +9,7 @@
   padding: 20px;
   position: relative;
   scrollbar-width: thin;
-  scrollbar-color: darkblue transparent;
+  scrollbar-color: var(--corPrimaria) transparent;
 }
 
 .container::-webkit-scrollbar {
@@ -21,23 +21,23 @@
 }
 
 .container::-webkit-scrollbar-thumb {
-  background: darkblue;
+  background: var(--corPrimaria);
   border-radius: 10px;
 }
 
 .container:hover::-webkit-scrollbar-thumb {
-  background: darkblue;
+  background: var(--corPrimaria);
 }
 
 .btn {
-  background-color: darkblue;
+  background-color: var(--corPrimaria);
   padding: 5px 20px;
   border-radius: 20px;
   opacity: 0.8;
   display: flex;
   align-items: center;
   text-align: center;
-  color: white;
+  color: var(--corFontePrimaria);
   border: none;
 }
 
@@ -47,8 +47,8 @@
   transition: transform 0.3s ease, opacity 0.3s ease;
 }
 .ativo {
-  background-color: white;
-  color: darkblue;
+  background-color: var(--corFontePrimaria);
+  color: var(--corPrimaria);
   animation: ativoAnimation 1s ease-in-out;
 }
 
@@ -73,17 +73,10 @@
     padding: 20px;
   }
   .btn {
-    background-color: darkblue;
     border-radius: 20px;
     opacity: 0.8;
     display: flex;
-    color: white;
     border: none;
     width: 130px;
-  }
-  .ativo {
-    background-color: white;
-    color: darkblue;
-    animation: ativoAnimation 1s ease-in-out;
   }
 }

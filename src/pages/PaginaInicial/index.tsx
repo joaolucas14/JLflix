@@ -8,7 +8,7 @@ export default function PaginaInicial() {
 
   return (
     <>
-      <h1>Filmes em alta</h1>
+      <h1>Filmes em alta!</h1>
       <div className={styles.container}>
         <InputTextFilter />
         <MovieList listaFilmes={listaFilmes!} />
