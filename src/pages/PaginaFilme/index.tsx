@@ -33,6 +33,7 @@ export default function PaginaFilme() {
 
       setColecao(null);
     }
+    window.scrollTo(0, 0);
   }, [id]); // Busca o filme apenas quando o ID mudar
 
   useEffect(() => {

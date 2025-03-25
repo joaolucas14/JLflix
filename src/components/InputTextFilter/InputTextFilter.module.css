@@ -5,4 +5,6 @@
   border-radius: 5px;
   border: 1px solid #ccc;
   margin-bottom: 20px;
+  background-color: var(--corFontePrimaria);
+  color: var(--corPrimaria);
 }
