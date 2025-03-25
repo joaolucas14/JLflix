@@ -2,13 +2,12 @@
 .paste_button {
   position: relative;
   display: block;
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   margin-right: 200px;
 }
 
 .button {
-  background-color: white;
-  color: darkblue;
+  background-color: var(--corFontePrimaria);
+  color: var(--corPrimaria);
   padding: 10px 15px;
   font-size: 15px;
   font-weight: bold;
@@ -21,14 +20,14 @@
   font-size: 13px;
   position: absolute;
   z-index: 1;
-  background-color: white;
-  border: 2px solid darkblue;
+  background-color: var(--corFontePrimaria);
+  border: 2px solid var(--corPrimaria);
   border-radius: 0px 15px 15px 15px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
 }
 
 .dropdown_content button {
-  color: darkblue;
+  color: var(--corPrimaria);
   padding: 8px 10px;
   text-decoration: none;
   display: block;
@@ -37,13 +36,13 @@
 }
 
 .dropdown_content button:hover {
-  background-color: darkblue;
-  color: white;
+  background-color: var(--corPrimaria);
+  color: var(--corFontePrimaria);
 }
 
 .dropdown_content button:focus {
-  background-color: #212121;
-  color: darkblue;
+  background-color: var(--corFontePrimaria);
+  color: var(--corPrimaria);
 }
 
 .dropdown_content #top:hover {
