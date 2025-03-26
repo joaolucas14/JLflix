@@ -67,3 +67,8 @@ export const termoBuscaState = atom<string>({
   key: "termoBuscaState",
   default: "",
 });
+
+export const classificacaoEtariaState = atom<number | string>({
+  key: "classificacaoEtariaState",
+  default: "N/A",
+});

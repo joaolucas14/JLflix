@@ -13,7 +13,7 @@ h2 {
   padding: 0px 20px 20px 20px;
   position: relative;
   scrollbar-width: thin;
-  width: 100%;
+  width: 93%;
   scrollbar-color: var(--corPrimaria) transparent;
 }
 
@@ -34,7 +34,7 @@ h2 {
   background: var(--corPrimaria);
 }
 
-.cast_list {
+.list {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -42,21 +42,21 @@ h2 {
   gap: 3px;
   width: 150px;
 }
-.cast_list p {
+.list p {
   margin: 0px;
 }
 
-.actor {
+.name {
   font-size: 12px;
   font-weight: 400;
 }
 
-.character {
+.function {
   font-size: 12px;
   font-weight: lighter;
 }
 
-.container img {
+.image {
   border-radius: 50%;
   width: 100px;
   height: 100px;
@@ -64,7 +64,7 @@ h2 {
   border: var(--corFontePrimaria) solid 2px;
 }
 
-.container img:hover {
+.image:hover {
   transform: scale(1.1);
   transition: transform 0.3s ease-in-out;
 }
