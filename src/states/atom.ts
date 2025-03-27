@@ -72,3 +72,8 @@ export const classificacaoEtariaState = atom<number | string>({
   key: "classificacaoEtariaState",
   default: "N/A",
 });
+
+export const legendasEDublagensState = atom<string[]>({
+  key: "legendasEDublagensState",
+  default: [],
+});

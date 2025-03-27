@@ -14,6 +14,7 @@ import useFilme from "../../states/hooks/movies/useFilme";
 import useColecaoFilme from "../../states/hooks/movies/useColecaoFilme";
 import useCreditosFilme from "../../states/hooks/movies/useCreditosFilme";
 import useClassificacaoEtaria from "../../states/hooks/movies/useClassificacaoEtaria";
+import useLegendaEDublagem from "../../states/hooks/movies/useLegendaEDublagem";
 
 export default function PaginaFilme() {
   const { id } = useParams<{ id: string }>();
@@ -22,7 +23,8 @@ export default function PaginaFilme() {
   const { buscarCreditos, creditos } = useCreditosFilme();
   const { buscarProvider } = useFilmeProvider();
   const { buscarTrailer, trailer } = useTrailerFilme();
-  const { buscarClassificacaoEtaria, classificacao } = useClassificacaoEtaria();
+  const { buscarClassificacaoEtaria } = useClassificacaoEtaria();
+  const { buscarLegendaEDublagem } = useLegendaEDublagem();
   const isCollection = filme?.belongs_to_collection?.id;
 
   useEffect(() => {
@@ -31,6 +33,7 @@ export default function PaginaFilme() {
       buscarCreditos(id);
       buscarProvider(id);
       buscarTrailer(id);
+      buscarLegendaEDublagem(id);
       buscarClassificacaoEtaria(id);
 
       setColecao(null);
@@ -52,7 +55,6 @@ export default function PaginaFilme() {
     <div>
       {filme && filme.title && (
         <>
-          <p>{classificacao}</p>
           <MovieDescription {...filme} />
           <div className={styles.detalhes}>
             {trailer && <Trailer trailers={trailer} tagline={filme.tagline} />}
@@ -62,10 +64,9 @@ export default function PaginaFilme() {
                 <ListCastCrew {...creditos} />
               </>
             )}
-            <InfoMovie {...filme} />
-
             {colecao && <ListColection id={filme.id} />}
           </div>
+          <InfoMovie />
         </>
       )}
     </div>

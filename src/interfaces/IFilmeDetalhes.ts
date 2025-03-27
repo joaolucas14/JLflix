@@ -22,4 +22,9 @@ export interface IFilmeDetalhes {
   homepage: string;
   budget: number;
   revenue: number;
+  spoken_languages: [
+    {
+      english_name: string;
+    }
+  ];
 }
