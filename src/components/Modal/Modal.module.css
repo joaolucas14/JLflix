@@ -1,0 +1,72 @@
+/* Fundo escuro semi-transparente que cobre toda a tela */
+.modal_overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5); /* Fundo escuro semi-transparente */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Garante que fique acima de outros elementos */
+}
+
+h2 {
+  padding-left: 10px;
+}
+
+/* Caixa do modal */
+.modal {
+  background: var(--corPrimaria);
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  min-width: 200px;
+  width: 30%;
+  position: relative;
+  text-align: start;
+  height: 500px;
+  overflow-y: auto;
+  color: var(--corFontePrimaria);
+  scrollbar-width: thin;
+  scrollbar-color: var(--corPrimaria) transparent;
+}
+
+.modal_content p {
+  padding: 5px;
+}
+
+/* Botão de fechar */
+.close_button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: var(--corFontePrimaria);
+}
+
+/* Conteúdo do modal */
+.modal_content {
+  margin-top: 20px;
+  margin-left: 15px;
+}
+
+.container::-webkit-scrollbar {
+  height: 8px;
+}
+
+.container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.container::-webkit-scrollbar-thumb {
+  background: var(--corPrimaria);
+  border-radius: 10px;
+}
+
+.container:hover::-webkit-scrollbar-thumb {
+  background: var(--corPrimaria);
+}

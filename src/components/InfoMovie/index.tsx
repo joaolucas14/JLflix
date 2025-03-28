@@ -1,11 +1,14 @@
+import { useState } from "react";
 import useClassificacaoEtaria from "../../states/hooks/movies/useClassificacaoEtaria";
 import useFilme from "../../states/hooks/movies/useFilme";
 import useLegendaEDublagem from "../../states/hooks/movies/useLegendaEDublagem";
+import Modal from "../Modal";
 import styles from "./Infomovie.module.css";
 export default function InfoMovie() {
   const { filme } = useFilme();
   const { classificacao } = useClassificacaoEtaria();
   const { legDub } = useLegendaEDublagem();
+  const [modalAberto, setModalAberto] = useState(false);
 
   return (
     <div className={styles.container}>
@@ -57,12 +60,17 @@ export default function InfoMovie() {
             {legDub.length > 3 && (
               <button
                 className={styles.verTudo}
-                onClick={() => alert("Ver tudo")}
+                onClick={() => setModalAberto(true)}
               >
                 Ver tudo
               </button>
             )}
           </p>
+          <Modal
+            isOpen={modalAberto}
+            onClose={() => setModalAberto(false)}
+            title="Legendas"
+          ></Modal>
         </div>
         <div className={styles.info}>
           <h4>Idiomas falados</h4>
