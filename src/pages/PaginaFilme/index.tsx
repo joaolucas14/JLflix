@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import styles from "./PaginaFilme.module.css";
 
 import InfoMovie from "../../components/InfoMovie";
-import ListCastCrew from "../../components/ListCast";
+import ListCastCrew from "../../components/ListCastCrew";
 import ListColection from "../../components/ListColection";
 import MovieDescription from "../../components/MovieDescription";
 
