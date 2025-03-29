@@ -12,13 +12,15 @@ export default function ListCastCrew({ cast, crew }: ICreditos) {
           .slice(0, 15)
           .map((ator) => (
             <div key={ator.id} className={styles.list}>
-              <img
-                src={`https://image.tmdb.org/t/p/w200${ator.profile_path}`}
-                alt={ator.name}
-                className={styles.image}
-              />
-              <p className={styles.name}>{`${ator.name} `}</p>
-              <p className={styles.function}>{ator.character}</p>
+              <Link to={`/diretor/${ator.id}`} className={styles.link}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w200${ator.profile_path}`}
+                  alt={ator.name}
+                  className={styles.image}
+                />
+                <p className={styles.name}>{`${ator.name} `}</p>
+                <p className={styles.function}>{ator.character}</p>
+              </Link>
             </div>
           ))}
         {crew

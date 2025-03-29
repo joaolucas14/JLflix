@@ -9,6 +9,7 @@ export interface IDiretor {
   id: number;
   name: string;
   biography: string;
+  known_for_department: string;
   profile_path?: string;
   movie_credits: Creditos;
   tv_credits: Creditos;
