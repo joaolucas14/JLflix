@@ -24,10 +24,12 @@ export default function InfoMovie() {
         </div>
         <div className={styles.info}>
           <h4>Duração</h4>
-          {filme!.runtime && (
+          {filme!.runtime > 0 ? (
             <p>{`${Math.floor(filme!.runtime / 60)}h ${
               filme!.runtime % 60
             }min`}</p>
+          ) : (
+            <p>Não disponível</p>
           )}
         </div>
         <div className={styles.info}>

@@ -1,0 +1,29 @@
+.container {
+  padding: 20px;
+  margin: 0px 100px;
+}
+
+.container_select {
+  display: flex;
+  justify-content: flex-end;
+}
+
+select {
+  padding: 5px 5px;
+  border: var(--corPrimaria);
+  background-color: var(--corFontePrimaria);
+  font-size: 16px;
+  color: var(--corSecundaria);
+}
+
+select:focus {
+  border-color: var(--corPrimaria);
+  outline: none;
+  background-color: var(--corFontePrimaria);
+}
+
+@media (max-width: 650px) {
+  .container {
+    margin: 0px 20px;
+  }
+}

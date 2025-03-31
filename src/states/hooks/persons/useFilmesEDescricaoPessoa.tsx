@@ -2,19 +2,19 @@ import { useRecoilState } from "recoil";
 import { diretorFilmesState } from "../../atom";
 import http from "../../../api";
 
-export default function useFilmesDiretor() {
-  const [diretorFilmes, setDiretorFilmes] = useRecoilState(diretorFilmesState);
+export default function useFilmesEDescricaoPessoa() {
+  const [pessoaFilmes, setPessoaFilmes] = useRecoilState(diretorFilmesState);
 
-  async function buscarFilmeDiretor(id: string) {
+  async function buscarFilmeEDescricao(id: string) {
     try {
       const resposta = await http.get(
         `person/${id}?append_to_response=movie_credits,tv_credits`
       );
-      setDiretorFilmes(resposta.data);
+      setPessoaFilmes(resposta.data);
       console.log(resposta.data);
     } catch (erro) {
       console.log("Erro ao buscar filmes do diretor", erro);
     }
   }
-  return { diretorFilmes, buscarFilmeDiretor };
+  return { pessoaFilmes, buscarFilmeEDescricao };
 }

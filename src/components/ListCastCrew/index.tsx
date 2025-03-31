@@ -12,7 +12,7 @@ export default function ListCastCrew({ cast, crew }: ICreditos) {
           .slice(0, 15)
           .map((ator) => (
             <div key={ator.id} className={styles.list}>
-              <Link to={`/diretor/${ator.id}`} className={styles.link}>
+              <Link to={`/ator/${ator.id}`} className={styles.link}>
                 <img
                   src={`https://image.tmdb.org/t/p/w200${ator.profile_path}`}
                   alt={ator.name}
