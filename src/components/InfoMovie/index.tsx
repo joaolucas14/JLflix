@@ -70,7 +70,16 @@ export default function InfoMovie() {
             isOpen={modalAberto}
             onClose={() => setModalAberto(false)}
             title="Legendas"
-          ></Modal>
+          >
+            <div className={styles.modal_content}>
+              {legDub.map((legenda, index) => (
+                <p key={index} className={styles.legenda}>
+                  {legenda}
+                  {index < Math.min(legDub.length, 3) - 1 && ", "}
+                </p>
+              ))}
+            </div>
+          </Modal>
         </div>
         <div className={styles.info}>
           <h4>Idiomas falados</h4>

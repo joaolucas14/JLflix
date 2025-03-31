@@ -1,4 +1,6 @@
+import { useState } from "react";
 import { IPessoa } from "../../interfaces/IPessoa";
+import Modal from "../Modal";
 import styles from "./PessoaInfo.module.css";
 
 export default function PessoaInfo({
@@ -10,6 +12,8 @@ export default function PessoaInfo({
   deathday,
   place_of_birth,
 }: IPessoa) {
+  const [modalAberto, setModalAberto] = useState(false);
+
   function calcularIdade(birthday: string, deathday?: string): number {
     const nascimento = new Date(birthday).getTime();
     const falecimento = deathday
@@ -27,6 +31,8 @@ export default function PessoaInfo({
       ? "Ator"
       : known_for_department === "Directing"
       ? "Diretor"
+      : known_for_department === "Writing"
+      ? "Escritor"
       : known_for_department;
   }
 
@@ -65,7 +71,30 @@ export default function PessoaInfo({
             {place_of_birth && `, ${place_of_birth}`}
           </p>
         )}
-        {biography && <p>{biography}</p>}
+        {biography && (
+          <p className={styles.biografia}>
+            {biography.length > 500 ? (
+              <>
+                {biography.substring(0, 400)}...
+                <button
+                  className={styles.verTudo}
+                  onClick={() => setModalAberto(true)}
+                >
+                  Ver mais
+                </button>
+              </>
+            ) : (
+              biography
+            )}
+          </p>
+        )}
+        <Modal
+          isOpen={modalAberto}
+          onClose={() => setModalAberto(false)}
+          title="Biografia"
+        >
+          {biography}
+        </Modal>
       </div>
     </div>
   );
