@@ -4,14 +4,18 @@ import useFilmesDiretor from "../../states/hooks/persons/useFilmesDiretor";
 import MovieList from "../../components/MovieList";
 import styles from "./PaginaDiretor.module.css";
 import PessoaInfo from "../../components/PeassoaInfo";
+import { useRecoilState } from "recoil";
+import { termoBuscaState } from "../../states/atom";
 
 export default function PaginaDiretor() {
   const { id } = useParams<{ id: string }>();
   const { buscarFilmeDiretor, diretorFilmes } = useFilmesDiretor();
   const [tipoLista, setTipoLista] = useState("Dirigiu");
+  const [, setTermoBusca] = useRecoilState(termoBuscaState);
 
   useEffect(() => {
     buscarFilmeDiretor(id!);
+    setTermoBusca("");
   }, [id]);
 
   function jaAtuou() {
@@ -27,15 +31,16 @@ export default function PaginaDiretor() {
         {diretorFilmes?.movie_credits ? (
           <>
             {jaAtuou() && (
-              <select
-                onChange={(e) => setTipoLista(e.currentTarget.value)}
-                value={tipoLista}
-              >
-                <option value="Dirigiu">Dirigiu</option>
-                <option value="Atuou">Atuou</option>
-              </select>
+              <div className={styles.container_select}>
+                <select
+                  onChange={(e) => setTipoLista(e.currentTarget.value)}
+                  value={tipoLista}
+                >
+                  <option value="Dirigiu">Dirigiu</option>
+                  <option value="Atuou">Atuou</option>
+                </select>
+              </div>
             )}
-            <h1>Diretor {diretorFilmes?.name}</h1>
             {tipoLista == "Dirigiu" ? (
               <MovieList listaFilmes={diretorFilmes?.movie_credits.crew} />
             ) : (

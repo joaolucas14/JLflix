@@ -7,7 +7,7 @@ import { IProviders } from "../interfaces/IProviders";
 import { ITrailer } from "../interfaces/ITrailer";
 import { IGenero } from "../interfaces/IGenero";
 import { IProviderList } from "../interfaces/IProviderList";
-import { IDiretor } from "../interfaces/IDiretor";
+import { IPessoa } from "../interfaces/IPessoa";
 
 export const listaFilmesState = atom<IFilme[] | null>({
   key: "listaFilmesState",
@@ -79,7 +79,7 @@ export const legendasEDublagensState = atom<string[]>({
   default: [],
 });
 
-export const diretorFilmesState = atom<IDiretor | null>({
+export const diretorFilmesState = atom<IPessoa | null>({
   key: "diretorFilmesState",
   default: null,
 });
