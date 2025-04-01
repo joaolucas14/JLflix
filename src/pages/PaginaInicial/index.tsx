@@ -6,6 +6,7 @@ import styles from "./PaginaInicial.module.css";
 export default function PaginaInicial() {
   const { listaFilmes } = useListaFilmes();
 
+  console.log(listaFilmes);
   return (
     <>
       <h1>Filmes em alta!</h1>

@@ -23,6 +23,14 @@ export default function MovieList({ listaFilmes }: MovieListProps) {
   }, [generosAtivos]);
   return (
     <div>
+      {/* <select onChange={(e) => alterarOrdenacao(e.target.value)}>
+        <option value="popularity.desc">Mais populares</option>
+        <option value="popularity.asc">Menos populares</option>
+        <option value="vote_average.desc">Melhor avaliados</option>
+        <option value="vote_average.asc">Pior avaliados</option>
+        <option value="release_date.desc">Mais recentes</option>
+        <option value="release_date.asc">Mais antigos</option>
+      </select> */}
       <GenrerFilter />
       <ContainerMovieList>
         {listaFilmes && listaFilmes.length > 0 ? (

@@ -23,7 +23,6 @@ export default function useListaProvider() {
         (provider: IProviderList) =>
           provedoresPopulares.includes(provider.provider_id)
       );
-      console.log(principaisProviders);
       setListaProvider(principaisProviders);
     } catch (erro) {
       console.log("Erro ao buscar providers", erro);
