@@ -1,7 +1,11 @@
 import { useRecoilState } from "recoil";
 import http from "../../../api";
 import { useEffect, useState, useRef } from "react";
-import { generosAtivosFiltroState, listaFilmesState } from "../../atom";
+import {
+  generosAtivosFiltroState,
+  listaFilmesState,
+  ordenacaoState,
+} from "../../atom";
 import IFilme from "../../../interfaces/IFilme";
 
 export default function useListaFilmes() {
@@ -12,6 +16,7 @@ export default function useListaFilmes() {
   const [pagina, setPagina] = useState(1);
   const [carregando, setCarregando] = useState(false);
   const [termoBusca, setTermoBusca] = useState("");
+  const [ordenacao] = useRecoilState(ordenacaoState);
   const carregandoRef = useRef(false);
 
   async function buscarFilmes(paginaAtual = 1) {
@@ -21,7 +26,10 @@ export default function useListaFilmes() {
       setCarregando(true);
       carregandoRef.current = true;
 
-      const params: Record<string, string | number> = { page: paginaAtual };
+      const params: Record<string, string | number> = {
+        page: paginaAtual,
+        sort_by: ordenacao,
+      };
 
       // Se houver gêneros selecionados, busca por gênero
       if (generosSelecionados.length > 0) {
@@ -64,6 +72,12 @@ export default function useListaFilmes() {
     setPagina(1);
     buscarFilmes(1);
   }
+  // function ordenacaoFilmes(ordem: string) {
+  //   setOrdenacao(ordem);
+  //   setListaFilmes([]); // Reseta a lista para evitar mistura
+  //   setPagina(1);
+  //   buscarFilmes(1);
+  // }
 
   useEffect(() => {
     const handleScroll = () => {

@@ -21,7 +21,7 @@ export default function PaginaProvider() {
   return (
     <>
       <h1>
-        Filmes{" "}
+        Filmes
         {typeof providerAtivo === "string"
           ? providerAtivo
           : providerAtivo?.provider_name}
