@@ -22,9 +22,7 @@ export default function PaginaProvider() {
     <>
       <h1>
         Filmes
-        {typeof providerAtivo === "string"
-          ? providerAtivo
-          : providerAtivo?.provider_name}
+        {` ${providerAtivo}`}
       </h1>
       <div className={styles.container}>
         <MovieList listaFilmes={providerFilmes!} />

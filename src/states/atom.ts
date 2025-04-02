@@ -86,5 +86,5 @@ export const diretorFilmesState = atom<IPessoa | null>({
 
 export const ordenacaoState = atom<string>({
   key: "ordenacaoState",
-  default: "vote_average.desc",
+  default: "popularity.desc",
 });
