@@ -19,6 +19,12 @@ export default function useListaFilmes() {
   const [ordenacao] = useRecoilState(ordenacaoState);
   const carregandoRef = useRef(false);
 
+  useEffect(() => {
+    if (ordenacao) {
+      buscarFilmes();
+    }
+  }, [ordenacao]);
+
   async function buscarFilmes(paginaAtual = 1) {
     if (carregando || carregandoRef.current) return;
 
@@ -43,6 +49,7 @@ export default function useListaFilmes() {
 
       const url = termoBusca ? "search/movie" : "discover/movie";
       const resposta = await http.get(url, { params });
+      console.log("respota", resposta.config.params);
 
       const novosFilmes = resposta.data.results.filter(
         (filme: IFilme) =>
@@ -63,7 +70,7 @@ export default function useListaFilmes() {
     setTermoBusca(termo);
     setListaFilmes([]); // Reseta a lista para evitar mistura
     setPagina(1);
-    buscarFilmes(1);
+    buscarFilmes();
   }
 
   function buscarFilmesPorGenero() {
@@ -72,12 +79,11 @@ export default function useListaFilmes() {
     setPagina(1);
     buscarFilmes(1);
   }
-  // function ordenacaoFilmes(ordem: string) {
-  //   setOrdenacao(ordem);
-  //   setListaFilmes([]); // Reseta a lista para evitar mistura
-  //   setPagina(1);
-  //   buscarFilmes(1);
-  // }
+  function ordenacaoFilmes() {
+    setListaFilmes([]); // Reseta a lista para evitar mistura
+    setPagina(1);
+    buscarFilmes(1);
+  }
 
   useEffect(() => {
     const handleScroll = () => {
@@ -99,5 +105,6 @@ export default function useListaFilmes() {
     buscarFilmesPorNome,
     buscarFilmesPorGenero,
     buscarFilmes,
+    ordenacaoFilmes,
   };
 }
