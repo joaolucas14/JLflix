@@ -5,6 +5,7 @@ import { RecoilRoot } from "recoil";
 import PaginaFilme from "./pages/PaginaFilme";
 import PaginaProvider from "./pages/PaginaProvider";
 import PaginaDiretor from "./pages/PaginaDiretor";
+import PaginaAtor from "./pages/PaginaAtor";
 
 function Rotas() {
   return (
@@ -16,6 +17,7 @@ function Rotas() {
             <Route path="filme/:id" element={<PaginaFilme />} />
             <Route path="provider/:id" element={<PaginaProvider />} />
             <Route path="diretor/:id" element={<PaginaDiretor />} />
+            <Route path="ator/:id" element={<PaginaAtor />} />
           </Route>
         </Routes>
       </Router>

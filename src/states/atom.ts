@@ -83,3 +83,8 @@ export const diretorFilmesState = atom<IPessoa | null>({
   key: "diretorFilmesState",
   default: null,
 });
+
+export const ordenacaoState = atom<string>({
+  key: "ordenacaoState",
+  default: "popularity.desc",
+});

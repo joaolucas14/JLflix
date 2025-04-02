@@ -1,7 +1,11 @@
 import { useRecoilState } from "recoil";
 import http from "../../../api";
 import { useEffect, useState, useRef } from "react";
-import { generosAtivosFiltroState, listaFilmesState } from "../../atom";
+import {
+  generosAtivosFiltroState,
+  listaFilmesState,
+  ordenacaoState,
+} from "../../atom";
 import IFilme from "../../../interfaces/IFilme";
 
 export default function useListaFilmes() {
@@ -12,7 +16,14 @@ export default function useListaFilmes() {
   const [pagina, setPagina] = useState(1);
   const [carregando, setCarregando] = useState(false);
   const [termoBusca, setTermoBusca] = useState("");
+  const [ordenacao] = useRecoilState(ordenacaoState);
   const carregandoRef = useRef(false);
+
+  useEffect(() => {
+    if (ordenacao) {
+      buscarFilmes();
+    }
+  }, [ordenacao]);
 
   async function buscarFilmes(paginaAtual = 1) {
     if (carregando || carregandoRef.current) return;
@@ -21,7 +32,10 @@ export default function useListaFilmes() {
       setCarregando(true);
       carregandoRef.current = true;
 
-      const params: Record<string, string | number> = { page: paginaAtual };
+      const params: Record<string, string | number> = {
+        page: paginaAtual,
+        sort_by: ordenacao,
+      };
 
       // Se houver gêneros selecionados, busca por gênero
       if (generosSelecionados.length > 0) {
@@ -35,6 +49,7 @@ export default function useListaFilmes() {
 
       const url = termoBusca ? "search/movie" : "discover/movie";
       const resposta = await http.get(url, { params });
+      console.log("respota", resposta.config.params);
 
       const novosFilmes = resposta.data.results.filter(
         (filme: IFilme) =>
@@ -55,11 +70,16 @@ export default function useListaFilmes() {
     setTermoBusca(termo);
     setListaFilmes([]); // Reseta a lista para evitar mistura
     setPagina(1);
-    buscarFilmes(1);
+    buscarFilmes();
   }
 
   function buscarFilmesPorGenero() {
     setGenerosSelecionados(generosSelecionados);
+    setListaFilmes([]); // Reseta a lista para evitar mistura
+    setPagina(1);
+    buscarFilmes(1);
+  }
+  function ordenacaoFilmes() {
     setListaFilmes([]); // Reseta a lista para evitar mistura
     setPagina(1);
     buscarFilmes(1);
@@ -85,5 +105,6 @@ export default function useListaFilmes() {
     buscarFilmesPorNome,
     buscarFilmesPorGenero,
     buscarFilmes,
+    ordenacaoFilmes,
   };
 }

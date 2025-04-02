@@ -42,10 +42,12 @@ export default function useProviderFilmes() {
           watch_region: string;
           page: number;
           with_genres?: string;
+          sort_by: string;
         } = {
           with_watch_providers: newProviderId,
           watch_region: "BR",
           page: paginaAtual,
+          sort_by: "primary_release_date.desc",
         };
 
         // Adiciona filtro de gêneros se houver seleção
@@ -54,6 +56,7 @@ export default function useProviderFilmes() {
         }
 
         const resposta = await http.get("/discover/movie", { params });
+        console.log("respota", resposta.config.params);
 
         setTotalPaginas(resposta.data.total_pages);
 

@@ -5,12 +5,14 @@ import ProviderList from "../ProviderList";
 import StarRating from "../StarRating";
 import styles from "./MovieDescription.module.css";
 export default function MovieDescription(filme: IFilmeDetalhes) {
-  // const { provider } = useProvider();
-
   return (
     <div
       style={{
-        backgroundImage: `url(https://image.tmdb.org/t/p/original${filme.backdrop_path})`,
+        backgroundImage: `url(${
+          filme.backdrop_path
+            ? `https://image.tmdb.org/t/p/original${filme.backdrop_path}`
+            : "../../assets/imageNotFound.png"
+        })`,
       }}
       className={styles.container}
     >
@@ -18,7 +20,7 @@ export default function MovieDescription(filme: IFilmeDetalhes) {
       <MovieGenrer {...filme} />
       <div className={styles.infos}>
         <p className={styles.title}>{filme.title}</p>
-        {filme.runtime && (
+        {filme.runtime > 0 && (
           <p>{`Duração: ${Math.floor(filme.runtime / 60)}h ${
             filme.runtime % 60
           }min`}</p>

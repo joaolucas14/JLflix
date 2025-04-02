@@ -24,10 +24,12 @@ export default function InfoMovie() {
         </div>
         <div className={styles.info}>
           <h4>Duração</h4>
-          {filme!.runtime && (
+          {filme!.runtime > 0 ? (
             <p>{`${Math.floor(filme!.runtime / 60)}h ${
               filme!.runtime % 60
             }min`}</p>
+          ) : (
+            <p>Não disponível</p>
           )}
         </div>
         <div className={styles.info}>
@@ -70,7 +72,16 @@ export default function InfoMovie() {
             isOpen={modalAberto}
             onClose={() => setModalAberto(false)}
             title="Legendas"
-          ></Modal>
+          >
+            <div className={styles.modal_content}>
+              {legDub.map((legenda, index) => (
+                <p key={index} className={styles.legenda}>
+                  {legenda}
+                  {index < Math.min(legDub.length, 3) - 1 && ", "}
+                </p>
+              ))}
+            </div>
+          </Modal>
         </div>
         <div className={styles.info}>
           <h4>Idiomas falados</h4>

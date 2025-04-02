@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import IFilme from "../../interfaces/IFilme";
 import StarRating from "../StarRating";
 import styles from "./MovieCard.module.css";
+import imageNotFound from "../../assets/imageNotFound.png";
 
 export default function MovieCard({
   id,
@@ -15,7 +16,11 @@ export default function MovieCard({
     <li className={styles.movie_card}>
       <div className={styles.movie_poster}>
         <img
-          src={`https://image.tmdb.org/t/p/original${poster_path}`}
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/original${poster_path}`
+              : imageNotFound
+          }
           alt={title}
         />
       </div>

@@ -32,6 +32,12 @@
 .infos p {
   margin: 5px;
 }
+.verTudo {
+  background-color: transparent;
+  border: none;
+  color: var(--corPrimaria);
+  cursor: pointer;
+}
 
 @media (max-width: 650px) {
   .container {
@@ -50,7 +56,7 @@
     object-fit: cover;
     border: solid 3px var(--corFontePrimaria);
   }
-  .infos {
-    text-align: center;
+  .biografia {
+    text-align: justify;
   }
 }

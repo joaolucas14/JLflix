@@ -15,12 +15,12 @@ interface MovieListProps {
 export default function MovieList({ listaFilmes }: MovieListProps) {
   const { buscarFilmesPorGenero } = useListaFilmes();
   const [termoBusca] = useRecoilState(termoBuscaState);
-
   const generosAtivos = useRecoilValue(generosAtivosFiltroState);
 
   useEffect(() => {
     buscarFilmesPorGenero();
   }, [generosAtivos]);
+
   return (
     <div>
       <GenrerFilter />

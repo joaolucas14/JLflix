@@ -21,10 +21,8 @@ export default function PaginaProvider() {
   return (
     <>
       <h1>
-        Filmes{" "}
-        {typeof providerAtivo === "string"
-          ? providerAtivo
-          : providerAtivo?.provider_name}
+        Filmes
+        {` ${providerAtivo}`}
       </h1>
       <div className={styles.container}>
         <MovieList listaFilmes={providerFilmes!} />

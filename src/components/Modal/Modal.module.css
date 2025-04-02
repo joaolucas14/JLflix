@@ -12,8 +12,9 @@
   z-index: 1000; /* Garante que fique acima de outros elementos */
 }
 
-h2 {
+.modal h2 {
   padding-left: 10px;
+  margin-bottom: 10px;
 }
 
 /* Caixa do modal */
@@ -31,6 +32,7 @@ h2 {
   color: var(--corFontePrimaria);
   scrollbar-width: thin;
   scrollbar-color: var(--corPrimaria) transparent;
+  padding: 20px;
 }
 
 .modal_content p {
