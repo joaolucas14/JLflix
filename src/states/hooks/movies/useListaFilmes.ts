@@ -6,13 +6,10 @@ import {
   listaFilmesState,
   ordenacaoState,
 } from "../../atom";
-import IFilme from "../../../interfaces/IFilme";
 
 export default function useListaFilmes() {
   const [listaFilmes, setListaFilmes] = useRecoilState(listaFilmesState);
-  const [generosSelecionados, setGenerosSelecionados] = useRecoilState(
-    generosAtivosFiltroState
-  );
+  const [generosSelecionados] = useRecoilState(generosAtivosFiltroState);
   const [pagina, setPagina] = useState(1);
   const [carregando, setCarregando] = useState(false);
   const [termoBusca, setTermoBusca] = useState("");
@@ -20,12 +17,25 @@ export default function useListaFilmes() {
   const carregandoRef = useRef(false);
 
   useEffect(() => {
+    const filmesSalvos = sessionStorage.getItem("listaFilmes");
+    if (filmesSalvos) {
+      setListaFilmes(JSON.parse(filmesSalvos));
+    } else {
+      buscarFilmes(1);
+    }
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("listaFilmes", JSON.stringify(listaFilmes));
+  }, [listaFilmes]);
+
+  useEffect(() => {
     if (ordenacao) {
-      buscarFilmes();
+      buscarFilmes(1, true);
     }
   }, [ordenacao]);
 
-  async function buscarFilmes(paginaAtual = 1) {
+  async function buscarFilmes(paginaAtual = 1, resetarLista = false) {
     if (carregando || carregandoRef.current) return;
 
     try {
@@ -37,26 +47,22 @@ export default function useListaFilmes() {
         sort_by: ordenacao,
       };
 
-      // Se houver gêneros selecionados, busca por gênero
       if (generosSelecionados.length > 0) {
         params.with_genres = generosSelecionados.join(",");
       }
 
-      // Se houver um termo de busca, filtra dentro do gênero
       if (termoBusca) {
         params.query = termoBusca;
       }
 
       const url = termoBusca ? "search/movie" : "discover/movie";
       const resposta = await http.get(url, { params });
-      console.log("respota", resposta.config.params);
 
-      const novosFilmes = resposta.data.results.filter(
-        (filme: IFilme) =>
-          !(listaFilmes ?? []).some((f: IFilme) => f.id === filme.id)
+      const novosFilmes = resposta.data.results;
+
+      setListaFilmes((prevFilmes) =>
+        resetarLista ? novosFilmes : [...(prevFilmes || []), ...novosFilmes]
       );
-
-      setListaFilmes((prevFilmes) => [...(prevFilmes || []), ...novosFilmes]);
       setPagina(paginaAtual + 1);
     } catch (erro) {
       console.error("Erro ao conectar à API:", erro);
@@ -68,37 +74,30 @@ export default function useListaFilmes() {
 
   function buscarFilmesPorNome(termo: string) {
     setTermoBusca(termo);
-    setListaFilmes([]); // Reseta a lista para evitar mistura
-    setPagina(1);
-    buscarFilmes();
+    buscarFilmes(1, true);
   }
 
   function buscarFilmesPorGenero() {
-    setGenerosSelecionados(generosSelecionados);
-    setListaFilmes([]); // Reseta a lista para evitar mistura
-    setPagina(1);
-    buscarFilmes(1);
+    buscarFilmes(1, true);
   }
+
   function ordenacaoFilmes() {
-    setListaFilmes([]); // Reseta a lista para evitar mistura
-    setPagina(1);
-    buscarFilmes(1);
+    buscarFilmes(1, true);
   }
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const alturaTotal = document.documentElement.scrollHeight;
-      const alturaVisivel = window.innerHeight;
-
-      if (scrollY + alturaVisivel >= alturaTotal - 200) {
+      if (
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 200
+      ) {
         buscarFilmes(pagina);
       }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [carregando]);
+  }, [pagina, carregando]);
 
   return {
     listaFilmes,

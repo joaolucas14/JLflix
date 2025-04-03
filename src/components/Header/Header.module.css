@@ -19,6 +19,22 @@
   text-decoration: none;
 }
 
+.btn {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  margin-left: auto;
+  margin-top: 5px;
+}
+.btn:hover {
+  scale: 1.1;
+}
+.btn img {
+  width: 20px;
+  height: 20px;
+}
+
 @media (max-width: 1000px) {
   .header {
     justify-content: space-around;
