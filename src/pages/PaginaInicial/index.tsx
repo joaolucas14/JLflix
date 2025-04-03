@@ -17,6 +17,7 @@ export default function PaginaInicial() {
   return (
     <>
       <h1>Filmes em alta!</h1>
+
       <div className={styles.container}>
         <InputTextFilter />
         <select onChange={(e) => setOrdenacao(e.currentTarget.value)}>

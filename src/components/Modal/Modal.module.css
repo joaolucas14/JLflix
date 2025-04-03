@@ -22,7 +22,7 @@
   background: var(--corPrimaria);
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-  min-width: 200px;
+  min-width: 250px;
   width: 30%;
   position: relative;
   text-align: start;
