@@ -14,13 +14,11 @@ export default function Header() {
     }
   }, []);
   return (
-    <>
-      <div className={styles.header}>
-        <a href={"/"} className={styles.link}>
-          <h1>JLflix</h1>
-        </a>
-        <ProvidersDropdown />
-      </div>
+    <div className={styles.header}>
+      <a href={"/"} className={styles.link}>
+        <h1>JLflix</h1>
+      </a>
+      <ProvidersDropdown />
       <button className={styles.btn} onClick={() => setModalAberto(true)}>
         <img src={interrogacao} alt="" />
       </button>
@@ -71,6 +69,6 @@ export default function Header() {
           </p>
         </div>
       </Modal>
-    </>
+    </div>
   );
 }
